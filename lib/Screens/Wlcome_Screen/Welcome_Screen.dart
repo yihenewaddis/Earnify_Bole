@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class Welcome_Screen1 extends StatefulWidget {
   Welcome_Screen1({super.key});
@@ -12,15 +13,16 @@ class Welcome_Screen1 extends StatefulWidget {
 }
 
 class _Welcome_Screen1State extends State<Welcome_Screen1> {
-  final Interconnectioncontroler = Get.put(InternetConnectionControler());
+  final storageData = GetStorage();
+  void isFirstOpenReset(){
+    storageData.write('isFirstOpen', true);
+  }
   PageController _controler = PageController();
   bool Islastpage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: Obx((){
-      if(Interconnectioncontroler.isConnected.value){
-        return Stack(
+    body:Stack(
       children: [
             
             PageView(
@@ -163,7 +165,7 @@ class _Welcome_Screen1State extends State<Welcome_Screen1> {
             children: [
 
               Islastpage ?
-                const SizedBox(width: 30,):
+                const SizedBox(width: 35,):
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed('/initialScreen');
@@ -190,6 +192,7 @@ class _Welcome_Screen1State extends State<Welcome_Screen1> {
                 Islastpage?
                   GestureDetector(
                     onTap: () {
+                    isFirstOpenReset();
                     Get.offAllNamed('/initialScreen');
                   },
                     child:const Text('Done',style: TextStyle(  
@@ -205,52 +208,11 @@ class _Welcome_Screen1State extends State<Welcome_Screen1> {
             ],
           ))
       ],
-    );
-      }else{
-        return Container(
-          child: Column(
-            children: [
-              const SizedBox(height: 100,),
-              const Expanded(
-                flex: 2,
-                child: Image(image: AssetImage('assets/noInternet.jpg'),fit: BoxFit.contain,)),
-              Expanded(
-                flex: 1,
-                child: Column(
-                children: [
-                  const Text('No internet connection',style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600
-                  ),),
-                  
-                  const Text('check your internet connection',style: TextStyle(
-                    fontSize: 16
-                  ),),
+    )
 
 
 
-                  GestureDetector(
-                    onTap:()=> Interconnectioncontroler.checkInternet(),
-                    child: Container(
-                      margin: EdgeInsets.only(top: 40),
-                      padding: EdgeInsets.symmetric(horizontal: 100,vertical: 15),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(20)
-                      ),
-                      child:const Text('Try again',style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                  )
-                ],
-              ))
-            ],
-          ),
-        );
-      }
-    })
-    );
+    )
+  ;
   }
 }
