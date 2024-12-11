@@ -1,7 +1,8 @@
+import 'package:earnify_bole/Controlers/BookMarkedController.dart';
+import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class DateFormatter {
   static String getRelativeTime(String dateString) {
@@ -27,41 +28,25 @@ class DateFormatter {
   }
 }
 
-Widget SmallCard(context, data) {
-  final storageData = GetStorage();
 
-
-  
-  final isBookmarkedRx = false.obs;
-bool isBookmarked() {
-    List Booked = storageData.read('Booked') ?? [];
-    return Booked.any((item) => item['id'] == data['id']);
-  }
-isBookmarkedRx.value = isBookmarked();
-
-
- void BookMark(data) {
-    List Booked = storageData.read('Booked') ?? [];
-
-    if (isBookmarked()) {
-      Booked.removeWhere((item) => item['id'] == data['id']);
-    } else {
-      Booked.add({
-        'id': data['id'],
-        'title': data['title']['rendered'],
-        'content': data['content']['rendered'],
-        "date": data['date'],
-        "image": data['jetpack_featured_media_url']
-      });
-    }
-    storageData.write('Booked', Booked);
-    // Update the reactive state
-    isBookmarkedRx.value = !isBookmarkedRx.value;
-  }
-
-  return Container(
+   
+Widget SmallCardForBookMark(context, data,index) {
+  final bookMarkedController = Get.find<BookMarkedController>();
+    final DetailControllers = Get.find<DetailController>();
+  return GestureDetector(
+     onTap: () {
+          DetailControllers.data.value = {
+            'id': data['id'],
+            'title':data['title'],
+            'content': data['content'],
+            'date': data['date'],
+'image': data['image']
+          };
+          Get.toNamed('/detail');
+        },
+    child: Container(
     width: MediaQuery.of(context).size.width,
-    height: 170,
+height: 130,
     padding: EdgeInsets.all(8),
     margin: EdgeInsets.only(bottom: 15),
     decoration: BoxDecoration(
@@ -80,15 +65,29 @@ isBookmarkedRx.value = isBookmarked();
       children: [
         Row(
           children: [
+Expanded(
+              flex: 2,
+              child: SizedBox(
+                  width: 50,
+                  height: 110,
+child: imageEnhanced(data['image'],)),
+            ),
+            
+            SizedBox(
+              width: 10,
+            ),
+       
             Expanded(
               flex: 4,
               child: Container(
                 width: MediaQuery.of(context).size.width - 100,
+height: 110,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      data['title']['rendered'],
+      data['title'],
                       overflow: TextOverflow.ellipsis,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -97,44 +96,7 @@ isBookmarkedRx.value = isBookmarked();
                     SizedBox(
                       height: 10,
                     ),
-                    GestureDetector(
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white,
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 238, 238, 238),
-                            width: 2,
-                          ),
-                        ),
-                        child: Text(
-                          'Popular ',
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 2,
-              child: SizedBox(
-                  width: 50,
-                  height: 110,
-                  child: imageEnhanced(data['jetpack_featured_media_url'])),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
+       Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
@@ -144,21 +106,29 @@ isBookmarkedRx.value = isBookmarked();
                   color: Colors.grey[600],
                 ),
                 Text(
-                  DateFormatter.getRelativeTime(data['date']),
+              DateFormatter.getRelativeTime(data['date']),
                   style: TextStyle(color: Colors.grey[700]),
                 )
               ],
             ),
-    Obx(() => GestureDetector(
-    onTap: () => BookMark(data),
-    child: isBookmarkedRx.value 
-      ? Icon(Icons.bookmark, color: Colors.red)
-      : Icon(Icons.bookmark_border),
-  ))
+GestureDetector(
+onTap: ()=>bookMarkedController.Remove(index),
+                  child: Icon(
+              Icons.remove_circle_outlined,
+          color: Colors.red,
+            ),
+                ),
             
           ],
         )
+
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     ),
-  );
+    ));
 }

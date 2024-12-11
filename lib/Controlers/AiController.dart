@@ -43,6 +43,8 @@ Future<void> fetchMoreAiData(int page , int endpoint) async {
       startLoading();
 final result = await _apiService.getApiData(endpoint,Page);
       AiData.value = result;
+      print('object');
+      print(AiData);
     } catch (e) {
       handleError(e.toString());
     } finally {

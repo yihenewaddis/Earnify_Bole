@@ -40,47 +40,38 @@ await controller.fetchMoreCryptoData(controller.PageForMorData.value,2);
         child: SingleChildScrollView(
           child: Column(
               children: [
-            
-              SizedBox(height: 15,),
-            
-              // couresel page
-        
-
-              
-        
-            
-            SizedBox(height: 20,),
+    
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-                      Row(     
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                          Container(
-                              width: 5, 
-                              height: 25,
-                              decoration: BoxDecoration(
+                  //     Row(     
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //         Container(
+                  //             width: 5, 
+                  //             height: 25,
+                  //             decoration: BoxDecoration(
                                 
-                                color: Colors.black, 
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                            ),
-                            const SizedBox(width: 5,),
-                    const Text('Crypto',style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700
-                            ),)
-                          ],
-                        ),
-                        GestureDetector(
-                  child: Icon(Icons.monetization_on_outlined,color:Color.fromARGB(255, 242, 179, 7)),
-                        )
-                      ],
-                    ),
+                  //               color: Colors.black, 
+                  //               borderRadius: BorderRadius.circular(10)
+                  //             ),
+                  //           ),
+                  //           const SizedBox(width: 5,),
+                  //   const Text('Crypto',style: TextStyle(
+                  //             fontSize: 20,
+                  //             fontWeight: FontWeight.w700
+                  //           ),)
+                  //         ],
+                  //       ),
+                  //       GestureDetector(
+                  // child: Icon(Icons.monetization_on_outlined,color:Color.fromARGB(255, 242, 179, 7)),
+                  //       )
+                  //     ],
+                  //   ),
         
                     
                     const SizedBox(height: 15,),

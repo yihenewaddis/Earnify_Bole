@@ -11,11 +11,12 @@ class BaseController extends GetxController {
     Get.snackbar(
       forwardAnimationCurve: Curves.bounceIn,
       reverseAnimationCurve: Curves.easeOut,
-      duration:const Duration(seconds: 5),
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
+duration:const Duration(seconds: 3),
+      backgroundColor: Colors.white,
+colorText: Colors.black,
       'Error', 'Oops! Something went wrong while fetching the data. Please try again later.');
     }
+
 
     void handleErrorForMoreDta(String message) {
     error.value = message;

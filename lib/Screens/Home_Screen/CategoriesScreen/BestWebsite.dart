@@ -40,7 +40,7 @@ await controller.fetchMoreBestWebsiteData(controller.PageForMorData.value,13);
           child: Column(
               children: [
             
-              SizedBox(height: 15,),
+              // SizedBox(height: 15,),
             
               // couresel page
         
@@ -48,39 +48,39 @@ await controller.fetchMoreBestWebsiteData(controller.PageForMorData.value,13);
               
         
             
-            SizedBox(height: 20,),
+            
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-                      Row(     
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                          Container(
-                              width: 5, 
-                              height: 25,
-                              decoration: BoxDecoration(
+      //                 Row(     
+      //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                 children: [
+      //                   Row(
+      //                     children: [
+      //                     Container(
+      //                         width: 5, 
+      //                         height: 25,
+      //                         decoration: BoxDecoration(
                                 
-                                color: Colors.black, 
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                            ),
-                            const SizedBox(width: 5,),
-                    const Text('Best Websites',style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700
-                            ),)
-                          ],
-                        ),
+      //                           color: Colors.black, 
+      //                           borderRadius: BorderRadius.circular(10)
+      //                         ),
+      //                       ),
+      //                       const SizedBox(width: 5,),
+      //               const Text('Best Websites',style: TextStyle(
+      //                         fontSize: 20,
+      //                         fontWeight: FontWeight.w700
+      //                       ),)
+      //                     ],
+      //                   ),
                     
-                        GestureDetector(
-      child: Icon(Icons.browser_updated_sharp,),
-                        )
-                      ],
-                    ),
+      //                   GestureDetector(
+      // child: Icon(Icons.browser_updated_sharp,),
+      //                   )
+      //                 ],
+      //               ),
         
                     
                     const SizedBox(height: 15,),

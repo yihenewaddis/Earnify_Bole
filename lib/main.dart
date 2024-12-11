@@ -1,4 +1,5 @@
 import 'package:earnify_bole/DependencyInjection/ConnectivityDependencyInjection.dart';
+import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Screens/Home_Screen/InitialScreen.dart';
 import 'package:earnify_bole/Service/WordPressApiService.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/WelcomeScreen', page: () => Welcome_Screen1()),
         GetPage(name: '/initialScreen', page: () => InitialHomeScreen()),
+GetPage(name: '/detail', page: () => DetailScreen()),
       ],
     );
   }

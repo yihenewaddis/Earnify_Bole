@@ -55,6 +55,9 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
             GButton(
               icon:Icons.local_fire_department,
               text: 'Trending',
+          iconActiveColor: Colors.red,
+      iconColor: Colors.red,
+  textColor: Colors.red,
             ),
             GButton(
               icon: Icons.bookmark_outline,

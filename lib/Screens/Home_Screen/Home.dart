@@ -1,4 +1,6 @@
+import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Ai.dart';
+import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/All.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/AndroidApps.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/AndroidTips.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/BestWebsite.dart';
@@ -19,8 +21,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final catagoryController = Get.put(CategoryController());
+
     return DefaultTabController(
-      length: 10, 
+length:11, 
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.grey[100],
@@ -78,59 +82,63 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(width: 15,),
         ],
 
-        bottom:  TabBar(
-                  tabAlignment: TabAlignment.center,        
-                  labelColor: Colors.black,
-                  labelStyle:const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  color:Colors.grey[500]
-                  ),
-                  isScrollable: true,
-                  padding: EdgeInsets.all(0),
-                  indicatorColor: Colors.black,
-                  indicatorPadding: EdgeInsets.zero, 
-                  tabs:const [
-                  Tab(
-                    text: '  AI  ',
-                  ),
-                  Tab(
-                    text: 'Android Apps',
-                  ),
-                  Tab(
-                    text: 'Android tips',
-                  ),
-                  Tab(
-                    text: 'Best Website',
-                  ),
-                  Tab(
-                    text: 'Crypto',
-                  ),
-                  Tab(
-                    text: 'Earnify',
-                  ),
-                  Tab(
-                    text: 'Earning apps',
-                  ),
-                  Tab(
-                    text: 'Forex',
-                  ),
-                  Tab(
-                    text: 'Sport',
-                  ),
-                  Tab(
-                    text: 'Tech',
-                  ),
-                
-                ]),
+    bottom:  TabBar(
+              tabAlignment: TabAlignment.center,        
+              labelColor: Colors.black,
+              labelStyle:const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500
+              ),
+              unselectedLabelStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              color:Colors.grey[500]
+              ),
+              isScrollable: true,
+              padding: EdgeInsets.all(0),
+              indicatorColor: Colors.black,
+              indicatorPadding: EdgeInsets.zero, 
+              tabs:const [
+              Tab(
+                text: '  All  ',
+              ),
+              Tab(
+                text: '  AI  ',
+              ),
+              Tab(
+                text: 'Android Apps',
+              ),
+              Tab(
+                text: 'Android tips',
+              ),
+              Tab(
+                text: 'Best Website',
+              ),
+              Tab(
+                text: 'Crypto',
+              ),
+              Tab(
+                text: 'Earnify',
+              ),
+              Tab(
+                text: 'Earning apps',
+              ),
+              Tab(
+                text: 'Forex',
+              ),
+              Tab(
+                text: 'Sport',
+              ),
+              Tab(
+                text: 'Tech',
+              ),
+            
+            ]),
               
             ),
           ],
           body:const TabBarView(children: [
+          All(),
           AI(),
           AndroidApps(),
           AndroidTips(),

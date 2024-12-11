@@ -1,32 +1,34 @@
 import 'package:earnify_bole/Service/WordPressApiService.dart';
 import 'package:get/get.dart';
 import '../Controlers/BaseController.dart';
-class PopularController extends BaseController{
+class AllController extends BaseController{
 
 
+    RxInt CurrentPageIndex = 0.obs;
     RxInt Page = 1.obs;
-    RxInt PageForMorData =1.obs;
-  
-RxInt endpoint = 16.obs;
+RxInt PageForMorData =1.obs;
+    // 12 means Ai id
+    RxInt endpoint = 0.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
-final PopularData = <dynamic>[].obs;
-  
+final AllData = <dynamic>[].obs;
+    void changeCurrentIndex(int index){
+      CurrentPageIndex.value = index;
+    }
 
   @override
   void onInit(){
     super.onInit();
-fetchPopularData(Page.value,endpoint.value);
+    fetchAllData(Page.value,endpoint.value);
   }
   
 
-Future<void> fetchMorePopularData(int page, int endpoint) async {
+Future<void> fetchMoreAllData(int page , int endpoint) async {
     PageForMorData++;
+  print(PageForMorData);
     try {
       startLoading();
-final result = await _apiService.getApiData(endpoint,PageForMorData.value);
-PopularData.addAll(result);
- print('object');
-      print(PopularData);
+    final result = await _apiService.getApiData(endpoint,PageForMorData.value);
+      AllData.addAll(result);
     } catch (e) {
     handleErrorForMoreDta(e.toString());
     } finally {
@@ -36,11 +38,11 @@ PopularData.addAll(result);
 
 
 
-Future<void> fetchPopularData(int Page , int endpoint) async {
+Future<void> fetchAllData(int Page , int endpoint) async {
     try {
       startLoading();
 final result = await _apiService.getApiData(endpoint,Page);
-   PopularData.value = result;
+      AllData.value = result;
     } catch (e) {
       handleError(e.toString());
     } finally {

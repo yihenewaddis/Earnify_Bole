@@ -39,6 +39,8 @@ Future<void> fetchCryptoData(int Page , int endpoint) async {
       startLoading();
 final result = await _apiService.getApiData(endpoint,Page);
 CryptoData.value = result;
+print('data');
+print(CryptoData);
     } catch (e) {
       handleError(e.toString());
     } finally {

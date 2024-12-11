@@ -25,7 +25,7 @@ Widget shimmerEffect_2(context){
     enabled: true,
     child: Container(
       width:MediaQuery.of(context).size.width,
-  height:190,
+     height:190,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5)

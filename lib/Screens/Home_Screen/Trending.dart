@@ -12,7 +12,6 @@ class TrendingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
         RefreshController _refreshController = RefreshController(initialRefresh: false);
 final controller = Get.find<PopularController>();
-
   void _onRefresh() async{
 controller.PopularData.value = [];
 await controller.fetchPopularData(1,16);

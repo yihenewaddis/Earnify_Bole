@@ -48,42 +48,41 @@ await controller.fetchMoreAndroidAppData(controller.PageForMorData.value,12);
               
         
             
-            SizedBox(height: 20,),
+            
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-                      Row(     
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                          Container(
-                              width: 5, 
-                              height: 25,
-                              decoration: BoxDecoration(
+//                       Row(     
+//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Row(
+//                           children: [
+//                           Container(
+//                               width: 5, 
+//                               height: 25,
+//                               decoration: BoxDecoration(
                                 
-                                color: Colors.black, 
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                            ),
-                            const SizedBox(width: 5,),
-                            const Text('Android Apps',style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700
-                            ),)
-                          ],
-                        ),
+//                                 color: Colors.black, 
+//                                 borderRadius: BorderRadius.circular(10)
+//                               ),
+//                             ),
+//                             const SizedBox(width: 5,),
+//                             const Text('Android Apps',style: TextStyle(
+//                               fontSize: 20,
+//                               fontWeight: FontWeight.w700
+//                             ),)
+//                           ],
+//                         ),
                     
-                        GestureDetector(
-              child: Icon(Icons.android_sharp),
-                        )
-                      ],
-                    ),
+//                         GestureDetector(
+//               child: Icon(Icons.android_sharp),
+//                         )
+//                       ],
+// ),
         
                     
-                const SizedBox(height: 15,),
                 Obx(() => (controller.AndroidAppData.isEmpty)?
                 Column(
                   children: [

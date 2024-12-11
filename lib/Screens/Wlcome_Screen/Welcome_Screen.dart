@@ -16,6 +16,7 @@ class _Welcome_Screen1State extends State<Welcome_Screen1> {
   final storageData = GetStorage();
   void isFirstOpenReset(){
     storageData.write('isFirstOpen', true);
+storageData.write('Booked', []);
   }
   PageController _controler = PageController();
   bool Islastpage = false;

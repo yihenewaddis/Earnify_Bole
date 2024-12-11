@@ -38,46 +38,38 @@ await controller.fetchMoreEarnifyData(controller.PageForMorData.value,5);
           child: Column(
               children: [
             
-              SizedBox(height: 15,),
-            
-              // couresel page
-        
 
-              
-        
-            
-            SizedBox(height: 20,),
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-                      Row(     
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                          Container(
-                              width: 5, 
-                              height: 25,
-                              decoration: BoxDecoration(
+          //             Row(     
+          //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //             children: [
+          //               Row(
+          //                 children: [
+          //                 Container(
+          //                     width: 5, 
+          //                     height: 25,
+          //                     decoration: BoxDecoration(
                                 
-                                color: Colors.black, 
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                            ),
-                            const SizedBox(width: 5,),
-                const Text('Earnify',style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700
-                            ),)
-                          ],
-                        ),
-                        GestureDetector(
-          child: Icon(Icons.collections_bookmark_outlined),
-                        )
-                      ],
-                    ),
+          //                       color: Colors.black, 
+          //                       borderRadius: BorderRadius.circular(10)
+          //                     ),
+          //                   ),
+          //                   const SizedBox(width: 5,),
+          //       const Text('Earnify',style: TextStyle(
+          //                     fontSize: 20,
+          //                     fontWeight: FontWeight.w700
+          //                   ),)
+          //                 ],
+          //               ),
+          //               GestureDetector(
+          // child: Icon(Icons.collections_bookmark_outlined),
+          //               )
+          //             ],
+          //           ),
         
                     
                     const SizedBox(height: 15,),

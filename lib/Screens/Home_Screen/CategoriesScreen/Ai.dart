@@ -1,4 +1,6 @@
 import 'package:earnify_bole/Controlers/AiController.dart';
+import 'package:earnify_bole/Controlers/BookMarkedController.dart';
+import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Trending.dart';
@@ -45,12 +47,10 @@ class AI extends StatelessWidget {
         RefreshController(initialRefresh: false);
 
     final controller = Get.put(AiController());
-    final Popularcontroller = Get.put(PopularController());
-
     void _onRefresh() async {
       controller.AiData.value = [];
       await controller.fetchAiData(1, 12);
-      Popularcontroller.fetchPopularData(1, 16);
+// await Popularcontroller.fetchPopularData(1, 16);
       _refreshController.refreshCompleted();
     }
 
@@ -71,267 +71,33 @@ class AI extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 15,
-              ),
-
-              // couresel page
-              Obx(() => (controller.AiData.isEmpty)
-                  ? shimmerEffect_2(context)
-                  : SizedBox(
-                      height: 220,
-                      width: double.infinity,
-                      child: PageView.builder(
-                          onPageChanged: (index) {
-                            controller.changeCurrentIndex(index);
-                          },
-                          itemCount: controller.AiData.length > 10
-                              ? 10
-                              : controller.AiData.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 15, right: 15),
-                      child: GestureDetector(
-                        
-                        
-onTap: ()=>Get.to(DetailScreen()),    
-                        
-                        
-                    child: Stack(
-                                children: [
-                                  imageEnhanced(controller.AiData[index]
-                                      ["jetpack_featured_media_url"]),
-                                  Positioned(
-                                      bottom: 0,
-                                      right: 0,
-                                      left: 0,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 110,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(0.5),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(height: 10),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: Text(
-                                                controller.AiData[index]
-                                                    ['title']['rendered'],
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 18,
-                                                    color: Colors.grey[100]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: Text(
-                                                'Artificial Intelligence ',
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                  color: Colors.grey[100],
-                                                  fontWeight: FontWeight.w200,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.watch_later_outlined,
-                                                  color: Colors.grey[100],
-                                                  size: 15,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  DateFormatter.getRelativeTime(
-                                                      controller.AiData[index]
-                                                          ['date']),
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.grey[100]),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ))
-                                ],
-                  ),),
-                            );
-                          }),
-                    )),
-
-              SizedBox(
-                height: 10,
-              ),
-
-              Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (var i = 0;
-                        i <
-                            ((controller.AiData.length > 10)
-                                ? 10
-                                : controller.AiData.length);
-                        i++)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 3.0),
-                        child: Obx(() => Container(
-                              height: 6,
-                              width:
-                                  (controller.CurrentPageIndex == i) ? 12 : 6,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: (controller.CurrentPageIndex == i)
-                                      ? Colors.black
-                                      : Colors.grey[500],
-                                  borderRadius: BorderRadius.circular(20)),
-                            )),
-                      )
-                  ],
-                ),
-              ),
-
-              SizedBox(
-                height: 20,
-              ),
 
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 5,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(10)),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                'Popular News',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                                transition: Transition.downToUp,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                                TrendingScreen()),
-                            child: Text(
-                              'View All   ',
-                              style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
+      
                       SizedBox(
-                        height: 20,
+    height: 15,
                       ),
-                      Obx(
-                        () => (Popularcontroller.PopularData.isEmpty)
-                            ? Column(
-                                children: [
-                                  shimmerEffect_2(context),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  shimmerEffect_2(context),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  shimmerEffect_2(context)
-                                ],
-                              )
-                            : Column(
-                                children: List.generate(
-                                    (Popularcontroller.PopularData.length > 5)
-                                        ? 5
-                                        : Popularcontroller.PopularData.length,
-                                    (index) => GestureDetector(
 
-
-                                      onTap:()=>Get.to(DetailScreen()),
-
-
-
-                                      child: SmallCard(context,
-                                        Popularcontroller.PopularData[index]),
-                                    )),
-                              ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 5,
-                            height: 25,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          const Text(
-                            'Latest News',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      
                       Obx(
                         () => (controller.AiData.isEmpty)
-                            ? shimmerEffect_2(context)
-                            : Column(
+                            ?                 Column(
+                  children: [
+                    shimmerEffect_2(context),
+                    SizedBox(height: 10,),
+                    shimmerEffect_2(context),
+                    SizedBox(height: 10,),
+                    shimmerEffect_2(context),
+                  ],
+                ): Column(
                                 children: List.generate(
-                                    controller.AiData.length,
-                                    (index) =>GestureDetector(
-                                  onTap:()=> Get.to(DetailScreen()),
-                                  
-                                  child:  BigCard(context,
-                                        controller.AiData[index], 'AI'),
-                                    )),
+                                  controller.AiData.length,
+                                  (index) => BigCard(
+                                      context, controller.AiData[index], 'AI'),
+                                ),
                               ),
                       ),
                       const SizedBox(

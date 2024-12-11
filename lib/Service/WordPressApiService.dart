@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,7 +10,7 @@ static const String baseUrl = 'https://blog.bolenav.com/wp-json/wp/v2';
   // Generic GET request method
   Future<dynamic> get(String endpoint) async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
+final response = await http.get(Uri.parse('$baseUrl/$endpoint')).timeout(const Duration(seconds:10));
       
       if (response.statusCode == 200) {
         return json.decode(response.body);
@@ -16,6 +18,9 @@ static const String baseUrl = 'https://blog.bolenav.com/wp-json/wp/v2';
         throw Exception('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
+      if (e is TimeoutException) {
+        throw Exception('Request timed out after 5 seconds');
+      }
       throw Exception('Error: $e');
     }
   }
@@ -24,7 +29,14 @@ static const String baseUrl = 'https://blog.bolenav.com/wp-json/wp/v2';
 
   // Common WordPress API endpoints
 Future<List<dynamic>> getApiData(int endpoint, int page) async {
+if(endpoint == 0 && page!=0){
+  return await get('posts?page=$page');
+}else if(endpoint == 0 && page==0){
+return await get('categories');
+}
+  else{
 return await get('posts?categories=$endpoint&page=$page');
+}
   }
 
 Future<List<dynamic>> getPopularApiData(int page) async {
