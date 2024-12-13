@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:earnify_bole/Controlers/NotificationController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Account.dart';
 import 'package:earnify_bole/Screens/Home_Screen/BookMark.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Home.dart';
@@ -28,6 +29,7 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    
     return Scaffold(
     body: Pages[selectedIndex],
       bottomNavigationBar:Padding(

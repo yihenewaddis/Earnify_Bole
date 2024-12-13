@@ -1,4 +1,5 @@
 import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
+import 'package:earnify_bole/Controlers/NotificationController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Ai.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/All.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/AndroidApps.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final catagoryController = Get.put(CategoryController());
-
+final NotificationController _NotificationController = Get.put(NotificationController());
     return DefaultTabController(
 length:11, 
       child: Scaffold(
@@ -71,15 +72,53 @@ length:11,
               const SearchScreen()),
             child:const Icon(Icons.search,size: 30,weight: 10,color: Colors.black,)),
           const SizedBox(width: 15,),
+
           GestureDetector(
-            onTap: ()=>Get.to(
+            onTap: ()=>{
+  Get.delete<NotificationController>(),
+      Get.to(
               transition: Transition.downToUp,
               duration:const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
               fullscreenDialog: true,
-              const NotificationScreen()),
-            child:const Icon(Icons.notifications_none,size: 30,color: Colors.black,)),
+              const NotificationScreen())},
+            child: Stack(
+              children: [
+                const Icon(Icons.notifications_none, size: 30, color: Colors.black),
+                Obx(() => _NotificationController.unreadCount.value > 0
+                  ? Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 14,
+                          minHeight: 14,
+                        ),
+                        child: Text(
+                          '${_NotificationController.unreadCount.value}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 8,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  : Container(
+                    height: 0,
+                    width: 0,
+                  ),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(width: 15,),
+
         ],
 
     bottom:  TabBar(
