@@ -90,7 +90,7 @@ await controller.fetchMoreEarnifyData(controller.PageForMorData.value,5);
                       controller.EarnifyData.length,
                       (index) => GestureDetector(
 onTap: ()=>Get.to(DetailScreen()),
-child: BigCard(context,controller.EarnifyData[index],'Earnify'),
+child: BigCard(context,controller.EarnifyData[index],index,'Earnify'),
                       )
                       ),
                     ),

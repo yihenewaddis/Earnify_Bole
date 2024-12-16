@@ -105,7 +105,7 @@ await controller.fetchMoreAndroidTipData(controller.PageForMorData.value,7);
 onTap: ()=>Get.to(DetailScreen()),
 
 
-              child: BigCard(context,controller.AndroidTipsData[index],'Android Tips'),
+      child: BigCard(context,controller.AndroidTipsData[index],index,'Android Tips'),
             )
                       ),
                     ),

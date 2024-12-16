@@ -98,7 +98,7 @@ shimmerEffect_2(context),
                 Column(
                       children: List.generate(
               controller.PopularData.length,
-  (index) => BigCard(context,controller.PopularData[index],'Trending')
+  (index) => BigCard(context,controller.PopularData[index],index,'Trending')
                       ),
                     ),
                         

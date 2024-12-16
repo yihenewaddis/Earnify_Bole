@@ -103,7 +103,7 @@ await controller.fetchMoreBestWebsiteData(controller.PageForMorData.value,13);
       onTap: ()=>Get.to(DetailScreen()),
 
 
-child: BigCard(context,controller.BestWebsiteData[index],'Website'),
+child: BigCard(context,controller.BestWebsiteData[index],index,'Website'),
     )
                       ),
                     ),

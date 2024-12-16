@@ -1,7 +1,9 @@
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class DateFormatter {
   static String getRelativeTime(String dateString) {
@@ -27,7 +29,7 @@ class DateFormatter {
   }
 }
 
-Widget SmallCard(context, data) {
+Widget SmallCard(context, data,index) {
   final storageData = GetStorage();
 
 
@@ -59,7 +61,26 @@ isBookmarkedRx.value = isBookmarked();
     isBookmarkedRx.value = !isBookmarkedRx.value;
   }
 
-  return Container(
+
+
+
+
+
+
+
+return Column(
+  children: [
+if(index % 3 == 0)
+      SizedBox(
+        height: AdSize.banner.height.toDouble(),
+        width: AdSize.banner.width.toDouble(),
+        child: AdWidget(
+          ad: AdMobHelper.getBannerAd()..load(),
+          key: UniqueKey(),
+        ),
+      ),
+  SizedBox(height: 10,),
+    Container(
     width: MediaQuery.of(context).size.width,
     height: 170,
     padding: EdgeInsets.all(8),
@@ -160,5 +181,7 @@ isBookmarkedRx.value = isBookmarked();
         )
       ],
     ),
-  );
+  )
+  ],
+);
 }

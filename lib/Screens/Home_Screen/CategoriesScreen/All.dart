@@ -1,3 +1,5 @@
+import 'package:earnify_bole/AdMobHelper.dart';
+import 'package:earnify_bole/Controlers/AdController.dart';
 import 'package:earnify_bole/Controlers/AiController.dart';
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class DateFormatter {
@@ -44,28 +47,27 @@ class All extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        RefreshController _refreshController =
+    RefreshController _refreshController =
         RefreshController(initialRefresh: false);
 
-    
     final Popularcontroller = Get.put(PopularController());
     final DetailControllers = Get.put(DetailController());
     final bookMarkedController = Get.put(BookMarkedController());
-final AllPostController = Get.put(AllController());
+    final AllPostController = Get.put(AllController());
     void _onRefresh() async {
-AllPostController.AllData.value = [];
+      AllPostController.AllData.value = [];
       await AllPostController.fetchAllData(1, 0);
 // await Popularcontroller.fetchPopularData(1, 16);
       _refreshController.refreshCompleted();
     }
 
     void _onLoading() async {
-await AllPostController.fetchMoreAllData(AllPostController.PageForMorData.value, 0);
+      await AllPostController.fetchMoreAllData(
+          AllPostController.PageForMorData.value, 0);
 
       _refreshController.loadComplete();
     }
-
-
+AdMobHelper adMobHelper = AdMobHelper();
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SmartRefresher(
@@ -78,34 +80,38 @@ await AllPostController.fetchMoreAllData(AllPostController.PageForMorData.value,
           child: Column(
             children: [
               SizedBox(
-height: 10,
+                height: 10,
               ),
 
               // couresel page
               Obx(() => (AllPostController.AllData.isEmpty)
                   ? shimmerEffect_2(context)
                   : SizedBox(
-height: 220,
+                      height: 220,
                       width: double.infinity,
                       child: PageView.builder(
                           onPageChanged: (index) {
-AllPostController.changeCurrentIndex(index);
+                            AllPostController.changeCurrentIndex(index);
                           },
                           itemCount: AllPostController.AllData.length > 10
                               ? 10
-      : AllPostController.AllData.length,
+                              : AllPostController.AllData.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:
                                   const EdgeInsets.only(left: 15, right: 15),
                               child: GestureDetector(
                                 onTap: () {
+                                  adMobHelper.createInterstitialAd();
                                   DetailControllers.data.value = {
-                        'id': AllPostController.AllData[index]['id'],
-                                    'title':AllPostController.AllData[index]['title']['rendered'],
+                                    'id': AllPostController.AllData[index]
+                                        ['id'],
+                                    'title': AllPostController.AllData[index]
+                                        ['title']['rendered'],
                                     'content': AllPostController.AllData[index]
                                         ['content']['rendered'],
-                    'date': AllPostController.AllData[index]['date'],
+                                    'date': AllPostController.AllData[index]
+                                        ['date'],
                                     'image': AllPostController.AllData[index]
                                         ['jetpack_featured_media_url']
                                   };
@@ -113,8 +119,9 @@ AllPostController.changeCurrentIndex(index);
                                 },
                                 child: Stack(
                                   children: [
-            imageEnhanced(AllPostController.AllData[index]
-                                        ["jetpack_featured_media_url"]),
+                                    imageEnhanced(
+                                        AllPostController.AllData[index]
+                                            ["jetpack_featured_media_url"]),
                                     Positioned(
                                         bottom: 0,
                                         right: 0,
@@ -124,12 +131,12 @@ AllPostController.changeCurrentIndex(index);
                                               horizontal: 10),
                                           width:
                                               MediaQuery.of(context).size.width,
-height: 120,
+                                          height: 120,
                                           decoration: BoxDecoration(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-borderRadius: BorderRadius.circular(5)
-                                          ),
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
                                           child: Column(
                                             children: [
                                               SizedBox(height: 10),
@@ -138,7 +145,8 @@ borderRadius: BorderRadius.circular(5)
                                                     .size
                                                     .width,
                                                 child: Text(
-                      AllPostController.AllData[index]
+                                                  AllPostController
+                                                          .AllData[index]
                                                       ['title']['rendered'],
                                                   maxLines: 2,
                                                   overflow:
@@ -181,7 +189,8 @@ borderRadius: BorderRadius.circular(5)
                                                   Text(
                                                     DateFormatter
                                                         .getRelativeTime(
-                            AllPostController.AllData[
+                                                            AllPostController
+                                                                    .AllData[
                                                                 index]['date']),
                                                     style: TextStyle(
                                                         fontSize: 12,
@@ -203,7 +212,7 @@ borderRadius: BorderRadius.circular(5)
                     )),
 
               SizedBox(
-height: 10,
+                height: 10,
               ),
 
               Obx(
@@ -212,7 +221,7 @@ height: 10,
                   children: [
                     for (var i = 0;
                         i <
-                    ((AllPostController.AllData.length > 10)
+                            ((AllPostController.AllData.length > 10)
                                 ? 10
                                 : AllPostController.AllData.length);
                         i++)
@@ -220,13 +229,15 @@ height: 10,
                         padding: const EdgeInsets.only(left: 3.0),
                         child: Obx(() => Container(
                               height: 6,
-                              width:
-                          (AllPostController.CurrentPageIndex == i) ? 12 : 6,
+                              width: (AllPostController.CurrentPageIndex == i)
+                                  ? 12
+                                  : 6,
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
-color: (AllPostController.CurrentPageIndex == i)
-                                      ? Colors.black
-                                      : Colors.grey[500],
+                                  color:
+                                      (AllPostController.CurrentPageIndex == i)
+                                          ? Colors.black
+                                          : Colors.grey[500],
                                   borderRadius: BorderRadius.circular(20)),
                             )),
                       )
@@ -280,7 +291,8 @@ color: (AllPostController.CurrentPageIndex == i)
                           )
                         ],
                       ),
-                      SizedBox(
+                      SizedBox(height: 10,),
+                   SizedBox(
                         height: 20,
                       ),
                       Obx(
@@ -303,29 +315,30 @@ color: (AllPostController.CurrentPageIndex == i)
                                     (Popularcontroller.PopularData.length > 5)
                                         ? 5
                                         : Popularcontroller.PopularData.length,
-                                    (index) => GestureDetector(
-                                          onTap: () {
-                                            DetailControllers.data.value = {
-                                              'id': Popularcontroller
-                                                  .PopularData[index]['id'],
-                                                  'title':Popularcontroller
-                                                  .PopularData[index]['title']['rendered'],
-                                              'content': Popularcontroller
-                                                      .PopularData[index]
-                                                  ['content']['rendered'],
-                                              'date': Popularcontroller
-                                                  .PopularData[index]['date'],
-                                              'image': Popularcontroller
-                                                      .PopularData[index]
-                                                  ['jetpack_featured_media_url']
-                                            };
-                                            Get.toNamed('/detail');
-                                          },
-                                          child: SmallCard(
-                                              context,
-                                              Popularcontroller
-                                                  .PopularData[index]),
-                                        )),
+                                (index) => Column(
+                                  children: [
+   
+    // Original GestureDetector
+    GestureDetector(
+      onTap: () {
+         adMobHelper.createInterstitialAd();
+        DetailControllers.data.value = {
+          'id': Popularcontroller.PopularData[index]['id'],
+          'title': Popularcontroller.PopularData[index]['title']['rendered'],
+          'content': Popularcontroller.PopularData[index]['content']['rendered'],
+          'date': Popularcontroller.PopularData[index]['date'],
+          'image': Popularcontroller.PopularData[index]['jetpack_featured_media_url']
+        };
+        Get.toNamed('/detail');
+      },
+      child: SmallCard(
+        context,
+        Popularcontroller.PopularData[index],
+        index
+      ),
+    ),
+                                  ],
+                                )),
                               ),
                       ),
                       SizedBox(
@@ -354,13 +367,13 @@ color: (AllPostController.CurrentPageIndex == i)
                         height: 15,
                       ),
                       Obx(
-                    () => (AllPostController.AllData.isEmpty)
+                        () => (AllPostController.AllData.isEmpty)
                             ? shimmerEffect_2(context)
                             : Column(
                                 children: List.generate(
-  AllPostController.AllData.length,
-                                  (index) => BigCard(
-                                      context, AllPostController.AllData[index], 'All'),
+                                  AllPostController.AllData.length,
+                              (index) => BigCard(context,
+                                  AllPostController.AllData[index],index ,'All'),
                                 ),
                               ),
                       ),

@@ -94,7 +94,7 @@ await controller.fetchMoreCryptoData(controller.PageForMorData.value,2);
 
 onTap: ()=>Get.to(DetailScreen()),
 
-  child: BigCard(context,controller.CryptoData[index],'Crypto'),
+  child: BigCard(context,controller.CryptoData[index],index,'Crypto'),
 )
                       ),
                     ),

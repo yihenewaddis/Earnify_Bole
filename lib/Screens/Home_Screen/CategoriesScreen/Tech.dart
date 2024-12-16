@@ -89,7 +89,7 @@ Obx(() => (controller.TechData.isEmpty)?
                 Column(
                       children: List.generate(
               controller.TechData.length,
-  (index) => BigCard(context,controller.TechData[index],'Tech')
+  (index) => BigCard(context,controller.TechData[index],index,'Tech')
                       ),
                     ),
                         

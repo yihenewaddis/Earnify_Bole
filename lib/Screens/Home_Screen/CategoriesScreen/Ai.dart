@@ -95,8 +95,7 @@ class AI extends StatelessWidget {
                 ): Column(
                                 children: List.generate(
                                   controller.AiData.length,
-                                  (index) => BigCard(
-                                      context, controller.AiData[index], 'AI'),
+          (index) => BigCard(context, controller.AiData[index], index,'AI'),
                                 ),
                               ),
                       ),

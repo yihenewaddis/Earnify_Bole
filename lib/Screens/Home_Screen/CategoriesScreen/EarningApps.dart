@@ -89,7 +89,7 @@ Obx(() => (controller.EarningAppData.isEmpty)?
                   controller.EarningAppData.length,
               (index) => GestureDetector(
             onTap: ()=>Get.to(DetailScreen()),
-child: BigCard(context,controller.EarningAppData[index],'Earning App'),
+child: BigCard(context,controller.EarningAppData[index],index,'Earning App'),
               )
                       ),
                     ),

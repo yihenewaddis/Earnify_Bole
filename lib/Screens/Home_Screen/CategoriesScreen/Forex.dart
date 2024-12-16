@@ -88,7 +88,7 @@ Obx(() => (controller.ForexData.isEmpty)?
                 Column(
                       children: List.generate(
               controller.ForexData.length,
-          (index) => BigCard(context,controller.ForexData[index],'Forex')
+  (index) => BigCard(context,controller.ForexData[index],index,'Forex')
                       ),
                     ),
                         

@@ -102,7 +102,7 @@ await controller.fetchMoreAndroidAppData(controller.PageForMorData.value,12);
 
 onTap: ()=>Get.to(DetailScreen()),
 
-                    child: BigCard(context,controller.AndroidAppData[index],'Android Apps'),
+            child: BigCard(context,controller.AndroidAppData[index],index,'Android Apps'),
                   )
                       ),
                     ),

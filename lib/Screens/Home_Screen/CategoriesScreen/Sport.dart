@@ -85,7 +85,7 @@ Obx(() => (controller.SportData.isEmpty)?
                 Column(
                       children: List.generate(
               controller.SportData.length,
-      (index) => BigCard(context,controller.SportData[index],'Sport')
+      (index) => BigCard(context,controller.SportData[index],index,'Sport')
                       ),
                     ),
                         

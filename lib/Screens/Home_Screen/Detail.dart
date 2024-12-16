@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class DateFormatter {
   static String getRelativeTime(String dateString) {
@@ -50,7 +52,8 @@ final bookMarkedController = Get.find<BookMarkedController>();
     
   final storageData = GetStorage();
   
-
+print('related');
+print(controller.Relateddata);
 
  final isBookmarkedRx = false.obs;
 bool isBookmarked() {
@@ -81,21 +84,22 @@ bool isBookmarked() {
     // Update the reactive state
     isBookmarkedRx.value = !isBookmarkedRx.value;
   }
+// AdMobHelper adMobHelper = AdMobHelper();
 
-
-
+// adMobHelper.showInterstitialAd();
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Stack(
         clipBehavior: Clip.none,
         children: [
+          
           Positioned(
             top: 0,
             left: 0,
             child: Obx(() => CachedNetworkImage(
                   width: MediaQuery.of(context).size.width,
-                  height: 450,
+height: 360,
                   imageUrl: controller.data['image'],
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
@@ -116,7 +120,7 @@ bool isBookmarked() {
             
             child: Container(
               
-margin: const EdgeInsets.only(top: 400),
+margin: const EdgeInsets.only(top: 300),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -192,13 +196,89 @@ onTap: () => Get.to(CommentScreen()),
                             ],
                           ),
                         ),
-                        SizedBox(height: 20),
+SizedBox(height: 10),
+                        
+SizedBox(
+        height: AdSize.banner.height.toDouble(),
+        width: AdSize.banner.width.toDouble(),
+        child: AdWidget(
+          ad: AdMobHelper.getBannerAd()..load(),
+          key: UniqueKey(),
+        ),
+      ),
+      SizedBox(height: 20),
+HtmlWidget(
+                      controller.data['title'],
+                          textStyle:
+                          TextStyle(
+fontWeight: FontWeight.bold,
+                            fontSize: 20, color: Colors.grey[800]),
+                        ),
                         HtmlWidget(
                           controller.data['content'],
                           textStyle:
                               TextStyle(fontSize: 16, color: Colors.grey[600]),
                         ),
-                        SizedBox(height: 40),
+                        
+                        SizedBox(height: 10),
+                        
+
+
+                Row(
+                          children: [
+                            Container(
+                              width: 5,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                          'Related Articles',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+
+
+
+
+
+      Obx(() =>  Column(
+                          children: List.generate(
+(controller.Relateddata.length > 5)
+                                  ? 5
+                                  : controller.Relateddata.length,
+                              (index) => GestureDetector(
+                                    onTap: () {
+                                      controller.data.value = {
+                                        'id': controller.Relateddata[index]['id'],
+                                        'title': controller.Relateddata[index]['title']['rendered'], 
+                                        'content':controller.Relateddata[index]
+                                                ['content']['rendered'],
+                                        'date':controller.Relateddata[index]['date'],
+                                        'image':controller.Relateddata[index]
+                                                ['jetpack_featured_media_url']
+                                      };
+                                      scrollController.animateTo(
+                                        0,
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    },
+                                    child: SmallCard(context,
+                                    controller.Relateddata[index],index),
+                                  )),
+                        ),
+),
+
+
+SizedBox(height: 50,),
+
                         Row(
                           children: [
                             Container(
@@ -249,7 +329,7 @@ onTap: () => Get.to(CommentScreen()),
                                       );
                                     },
                                     child: SmallCard(context,
-                                        Popularcontroller.PopularData[index]),
+                                    Popularcontroller.PopularData[index],index),
                                   )),
                         ),
                         SizedBox(
@@ -334,6 +414,20 @@ Icons.bookmark_border,
               ],
             ),
           ),
+                  Positioned(
+  bottom: 0,
+  left: 0,
+  right: 0,
+  child: Container(
+height: 60, 
+width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
+    alignment: Alignment.center,
+    child: AdWidget(ad: AdMobHelper.getBannerAd()..load(),
+    key: UniqueKey(),
+),
+    
+  ),
+),
         ],
       ),
     );
