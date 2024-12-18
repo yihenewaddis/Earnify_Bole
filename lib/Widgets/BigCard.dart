@@ -87,10 +87,10 @@ return Column(
   children: [
 if(index % 3 == 0 && index !=0)
       SizedBox(
-        height: AdSize.banner.height.toDouble(),
-        width: AdSize.banner.width.toDouble(),
+height:250,
+width: MediaQuery.of(context).size.width.toDouble(),
         child: AdWidget(
-          ad: AdMobHelper.getBannerAd()..load(),
+ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
           key: UniqueKey(),
         ),
       ),
@@ -120,7 +120,7 @@ onTap: () async{
 final AllControllers= Get.find<AllController>();
 DetailControllers.Relateddata.value = AllControllers.AllData;
 }
-else if(catagory == 'Popular'){
+else if(catagory == 'Trending'){
 final popularController = Get.find<PopularController>();
 DetailControllers.Relateddata.value = popularController.PopularData;
  }
@@ -172,7 +172,8 @@ DetailControllers.Relateddata.value = techController.TechData;
             'title':data['title']['rendered'],
             'content': data['content']['rendered'],
             'date': data['date'],
-            'image': data['jetpack_featured_media_url']
+            'image': data['jetpack_featured_media_url'],
+            'Link':data['link']
           };
           Get.toNamed('/detail');
           

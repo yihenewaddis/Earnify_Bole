@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
+import 'package:earnify_bole/Controlers/CommentController.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Comment.dart';
-import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:earnify_bole/Widgets/SmallCard.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DateFormatter {
   static String getRelativeTime(String dateString) {
@@ -47,6 +48,7 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<DetailController>();
     final Popularcontroller = Get.find<PopularController>();
+final commentController = Get.put(CommentController());
     final scrollController = ScrollController();
 final bookMarkedController = Get.find<BookMarkedController>();
     
@@ -170,7 +172,10 @@ margin: const EdgeInsets.only(top: 300),
                                 ],
                               ),
                               GestureDetector(
-onTap: () => Get.to(CommentScreen()),
+onTap: () =>{ 
+  commentController.postId.value = controller.data['id'],
+  Get.to(CommentScreen())
+  },
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -199,10 +204,10 @@ onTap: () => Get.to(CommentScreen()),
 SizedBox(height: 10),
                         
 SizedBox(
-        height: AdSize.banner.height.toDouble(),
-        width: AdSize.banner.width.toDouble(),
+        height: 250,
+        width: MediaQuery.of(context).size.width.toDouble(),
         child: AdWidget(
-          ad: AdMobHelper.getBannerAd()..load(),
+ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
           key: UniqueKey(),
         ),
       ),
@@ -271,7 +276,7 @@ fontWeight: FontWeight.bold,
                                       );
                                     },
                                     child: SmallCard(context,
-                                    controller.Relateddata[index],index),
+                                    controller.Relateddata[index],index,'Popular'),
                                   )),
                         ),
 ),
@@ -329,12 +334,19 @@ SizedBox(height: 50,),
                                       );
                                     },
                                     child: SmallCard(context,
-                                    Popularcontroller.PopularData[index],index),
+                                    Popularcontroller.PopularData[index],index,'Popular'),
                                   )),
                         ),
-                        SizedBox(
-                          height: 100,
-                        ),
+                       SizedBox(height: 10),
+                        
+SizedBox(
+        height: 250,
+        width: MediaQuery.of(context).size.width.toDouble(),
+        child: AdWidget(
+ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
+          key: UniqueKey(),
+        ),
+  ),
                       ],
                     ),
                   ),
@@ -396,7 +408,9 @@ Icons.bookmark_border,
                       width: 10,
                     ),
                     GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: () => {
+                        Share.share(controller.data['Link'])
+                      },
                       child: Container(
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
@@ -422,7 +436,7 @@ Icons.bookmark_border,
 height: 60, 
 width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
     alignment: Alignment.center,
-    child: AdWidget(ad: AdMobHelper.getBannerAd()..load(),
+child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
     key: UniqueKey(),
 ),
     

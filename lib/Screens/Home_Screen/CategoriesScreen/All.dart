@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class DateFormatter {
@@ -103,6 +102,7 @@ AdMobHelper adMobHelper = AdMobHelper();
                               child: GestureDetector(
                                 onTap: () {
                                   adMobHelper.createInterstitialAd();
+DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                   DetailControllers.data.value = {
                                     'id': AllPostController.AllData[index]
                                         ['id'],
@@ -113,7 +113,8 @@ AdMobHelper adMobHelper = AdMobHelper();
                                     'date': AllPostController.AllData[index]
                                         ['date'],
                                     'image': AllPostController.AllData[index]
-                                        ['jetpack_featured_media_url']
+                                        ['jetpack_featured_media_url'],
+                                    "Link": AllPostController.AllData[index]['link']
                                   };
                                   Get.toNamed('/detail');
                                 },
@@ -322,19 +323,23 @@ AdMobHelper adMobHelper = AdMobHelper();
     GestureDetector(
       onTap: () {
          adMobHelper.createInterstitialAd();
+         final popularController = Get.find<PopularController>();
+         DetailControllers.Relateddata.value = popularController.PopularData;
         DetailControllers.data.value = {
           'id': Popularcontroller.PopularData[index]['id'],
           'title': Popularcontroller.PopularData[index]['title']['rendered'],
           'content': Popularcontroller.PopularData[index]['content']['rendered'],
           'date': Popularcontroller.PopularData[index]['date'],
-          'image': Popularcontroller.PopularData[index]['jetpack_featured_media_url']
+          'image': Popularcontroller.PopularData[index]['jetpack_featured_media_url'],
+          'Link':Popularcontroller.PopularData[index]['link']
         };
         Get.toNamed('/detail');
       },
       child: SmallCard(
         context,
         Popularcontroller.PopularData[index],
-        index
+        index,
+        'Popular'
       ),
     ),
                                   ],

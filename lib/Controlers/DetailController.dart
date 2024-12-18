@@ -7,7 +7,8 @@ RxMap<String, dynamic> data =  <String, dynamic>{
 'title': '',
 'content':'',
 "date":'',
-"image":''
+"image":'',
+"Link":''
 }.obs;
 @override
   void onInit() {

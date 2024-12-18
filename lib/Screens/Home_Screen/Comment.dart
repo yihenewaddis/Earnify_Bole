@@ -1,27 +1,38 @@
+import 'package:earnify_bole/Controlers/CommentController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:get/get.dart';
 
-class CommentScreen extends StatelessWidget {
+class CommentScreen extends StatefulWidget {
   const CommentScreen({super.key});
 
+  @override
+  State<CommentScreen> createState() => _CommentScreenState();
+}
+
+class _CommentScreenState extends State<CommentScreen> {
+  final controller = Get.find<CommentController>();
+  @override
+  void initState() {
+    super.initState();
+    controller.fetchCommentData();
+  }
   @override
   Widget build(BuildContext context) {
     RefreshController _refreshController =
         RefreshController(initialRefresh: false);
-    final controller = Get.find<PopularController>();
     void _onRefresh() async {
-      controller.PopularData.value = [];
-      await controller.fetchPopularData(1, 16);
+      controller.CommentData.value = [];
+      await controller.fetchMoreCommentData();
       _refreshController.refreshCompleted();
     }
 
     void _onLoading() async {
-      await controller.fetchMorePopularData(
-          controller.PageForMorData.value, 16);
+      await controller.fetchCommentData();
       _refreshController.loadComplete();
     }
 
@@ -51,6 +62,10 @@ class CommentScreen extends StatelessWidget {
               ],
             ),
             GestureDetector(
+              onTap: ()=>{
+                controller.CommentData.value = [],
+                controller.fetchCommentData()
+              },
               child: Icon(Icons.rotate_left_rounded),
             )
           ],
@@ -62,11 +77,20 @@ class CommentScreen extends StatelessWidget {
         onLoading: _onLoading,
         enablePullDown: true,
         enablePullUp: true,
-        child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Center(
-                child: Column(
+        child: SingleChildScrollView(
+            child: Obx(() => controller.CommentData.length==0?Center(
+                child: controller.isLoading.value==true?Column(
+              children: [
+                SizedBox(
+                  height: 200,
+                ),
+                  shimmerEffect_2(context),
+                    SizedBox(height: 10,),
+                    shimmerEffect_2(context),
+                    SizedBox(height: 10,),
+                    shimmerEffect_2(context),
+              ],
+            ):Column(
               children: [
                 SizedBox(
                   height: 200,
@@ -78,7 +102,7 @@ class CommentScreen extends StatelessWidget {
                   height: 200,
                 ),
                 const Text(
-                  'Comment Functionality Coming Soon',
+                  'There is no comment for this post',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -103,8 +127,49 @@ class CommentScreen extends StatelessWidget {
                   ),
                 )
               ],
+            )):Column(
+              children: List.generate(
+                                  controller.CommentData.length,
+          (index) => Container(
+            margin: EdgeInsets.symmetric(vertical: 5),
+            padding: EdgeInsets.symmetric(vertical: 5) ,
+            
+            width: MediaQuery.of(context).size.width-20,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+
+                  child: Column(
+                    children: [
+                      Icon(Icons.person_outlined,size: 30,color: Colors.grey[500],),
+                      Text('Admin',style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10
+                      ),)
+                    ],
+                  ),
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child:  HtmlWidget(
+                              controller.CommentData[index]['content']['rendered'],
+                              textStyle:
+                                  TextStyle(fontSize: 16, color: Colors.grey[900]),
+                            ),
+                  ),
+                )
+              ],
+            ),
+          ),
             ))),
       ),
-    );
+    ));
   }
 }

@@ -39,6 +39,18 @@ return await get('posts?categories=$endpoint&page=$page');
 }
   }
 
+
+
+// https://blog.bolenav.com/wp-json/wp/v2/comments?post=163
+
+Future<List<dynamic>> getComments(int postId,int Page) async {
+return await get('comments?post=$postId&page=$Page');
+}
+
+Future<List<dynamic>> getSearch(String text) async {
+return await get('posts?search=$text');
+}
+
 Future<List<dynamic>> getPopularApiData(int page) async {
 return await get('posts?page=$page');
   }

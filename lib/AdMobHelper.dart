@@ -1,5 +1,6 @@
 
 
+
 import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdMobHelper{
@@ -65,8 +66,8 @@ isInterstitialAdReady = false;
 
   interstitialAd = null;
 }
-static BannerAd getBannerAd(){
-       BannerAd bAd =  BannerAd(size: AdSize.fullBanner, adUnitId: bannerUnitId, listener: BannerAdListener(
+static BannerAd getBannerAd(context, {double? width, double? height}){
+BannerAd bAd =  BannerAd(size: AdSize(width: width?.toInt() ?? AdSize.banner.width, height: height?.toInt() ?? AdSize.banner.height), adUnitId: bannerUnitId, listener: BannerAdListener(
         onAdLoaded: (Ad ad){
           print('add loaded');
         },

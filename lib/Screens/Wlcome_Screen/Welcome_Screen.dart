@@ -19,133 +19,232 @@ class _Welcome_Screen1State extends State<Welcome_Screen1> {
 storageData.write('Booked', []);
   }
   PageController _controler = PageController();
-  bool Islastpage = false;
+  bool   IsFirstPage = true;
+  bool   IsLastPage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
     body:Stack(
+      
       children: [
             
             PageView(
               controller: _controler,
               onPageChanged: (index){
                 setState(() {
-                  Islastpage = (index == 2);
+                  IsFirstPage = (index == 0);
+                  IsLastPage = (index == 2);
                 });
               },
           children: [
 
             Container(
               color: Colors.white,
-              child:const Column(
+              child: Column(
                 children: [
-                    Expanded(
+                   const Expanded(
+                    flex: 2,
+                    child:Row(
+                      children: [
+
+                      ],
+                    )),
+                   const Expanded(
                     flex: 5,
                     child: Image(
+                      width: 350,
+                      height: 350,
                       fit: BoxFit.contain,
-                      image: AssetImage('assets/welcome.jpg'))),
-                  Expanded(
-                    flex: 2,
-                    child:Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Welcome",style: TextStyle(
-                            color: Color.fromARGB(255, 1, 72, 3),
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500
-                          ),),
-
-
-                          
-                          
-                          Padding(
-                            padding:  EdgeInsets.all(8),
-                            child: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam  ',style: TextStyle(
-                                  color: Color.fromARGB(255, 1, 72, 3),
-                                  fontSize: 20,
-                                  
-                                ),
-                            textAlign: TextAlign.center,
-                              ),
-                          ),
-                          
-                        ],
-                      ),
-                  )
-                ],
-              ),
-            ),
-
-
-            Container(
-              color: Colors.white,
-              child:const Column(
-                children: [
-                    Expanded(
-                    flex: 5,
-                    child: Image(
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/notification.jpg'))),
-                  Expanded(
-                    flex: 2,
-                    child:Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Get Notification First",style: TextStyle(
-                            color:  Color.fromARGB(255, 1, 72, 3),
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500
-                          ),),
-
-                          Padding(
-                            padding:  EdgeInsets.all(10.0),
-                            child: Text('subscribe and get notification to all of our article & share with your frends..',style: TextStyle(
-                                  color:Color.fromARGB(255, 1, 72, 3),
-                                  fontSize: 20,
-                                  
-                                ),
-                            textAlign: TextAlign.center,
-                              ),
-                          ),
-                          
-                        ],
-                      ),
-                  )
-                ],
-              ),
-            ),
-
-
-            Container(
-              color: Colors.white,
-              child:const Column(
-                children: [
-                    Expanded(
-                    flex: 6,
-                    child: Image(
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/share.jpg'))),
+                      image: AssetImage('assets/Page1.png'))),
                   Expanded(
                     flex: 3,
                     child:Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("Save & Share your Favorite Content Easly",style: TextStyle(
-                            color:  Color.fromARGB(255, 1, 72, 3),
+                          const Text("Welcome to BoleNav",style: TextStyle(
+                            color: Color.fromARGB(255, 1, 72, 3),
                             fontSize: 25,
+                            fontFamily: 'Inter',
                             fontWeight: FontWeight.w500
-                          ),textAlign: TextAlign.center,),
+                          ),),
 
-                          Padding(
-                            padding:  EdgeInsets.all(10.0),
-                            child: Text('Bookmark , like & Coment on your favorite article and share on special meida...',style: TextStyle(
-                                  color:Color.fromARGB(255, 1, 72, 3),
-                                  fontSize: 20,
-                                  
+
+                          
+                          
+                         const Padding(
+                            padding:  EdgeInsets.all(1),
+                            child: Text('Start earning online today',style: TextStyle(
+                                  color: Color.fromARGB(255, 1, 72, 3),
+                            fontSize: 22,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500
                                 ),
                             textAlign: TextAlign.center,
                               ),
                           ),
+SizedBox(height: 40,),
+                         GestureDetector(
+                          onTap: (){
+_controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.easeIn);
+                          },
+                          child:  Container(
+                            padding: EdgeInsets.symmetric(horizontal: 140,vertical: 20),
+                            decoration: BoxDecoration(
+                              color:  Colors.black,
+                              borderRadius: BorderRadius.circular(40)
+                            ),
+                            child: Text(
+                              "Start",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'inter',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
+                         )
+                          
+                        ],
+                      ),
+                  )
+                ],
+              ),
+            ),
+
+
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                   const Expanded(
+                    flex: 2,
+                    child:Row(
+                      children: [
+
+                      ],
+                    )),
+                   const Expanded(
+                    flex: 5,
+                    child: Image(
+                      width: 350,
+                      height: 350,
+                      fit: BoxFit.contain,
+                      image: AssetImage('assets/Page2.png'))),
+                  Expanded(
+                    flex: 3,
+                    child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          
+
+
+                          
+                          
+                         const Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 20),
+                            child: Text('Discover simple trust ways to earn money.',style: TextStyle(
+                                  color: Color.fromARGB(255, 1, 72, 3),
+                            fontSize: 22,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500
+                                ),
+                            textAlign: TextAlign.center,
+                              ),
+                          ),
+SizedBox(height: 40,),
+                         GestureDetector(
+                          onTap: (){
+_controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.easeIn);
+                          },
+                          child:  Container(
+                            padding: EdgeInsets.symmetric(horizontal: 140,vertical: 20),
+                            decoration: BoxDecoration(
+                              color:  Colors.black,
+                              borderRadius: BorderRadius.circular(40)
+                            ),
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'inter',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
+                         )
+                          
+                        ],
+                      ),
+                  )
+                ],
+              ),
+            ),
+
+
+           Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                   const Expanded(
+                    flex: 2,
+                    child:Row(
+                      children: [
+
+                      ],
+                    )),
+                   const Expanded(
+                    flex: 5,
+                    child: Image(
+                      width: 350,
+                      height: 350,
+                      fit: BoxFit.contain,
+                      image: AssetImage('assets/Page3.png'))),
+                  Expanded(
+                    flex: 3,
+                    child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          
+
+
+                          
+                          
+                         const Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 20),
+                            child: Text("Let's navigate your journey to financial success",style: TextStyle(
+                                 color: Color.fromARGB(255, 1, 72, 3),
+                            fontSize: 22,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500
+                                ),
+                            textAlign: TextAlign.center,
+                              ),
+                          ),
+SizedBox(height: 40,),
+                         GestureDetector(
+                          onTap: (){
+Get.offNamed('/initialScreen');
+                          },
+                          child:  Container(
+                            padding: EdgeInsets.symmetric(horizontal: 100,vertical: 20),
+                            decoration: BoxDecoration(
+                              color:  Colors.black,
+                              borderRadius: BorderRadius.circular(40)
+                            ),
+                            child: Text(
+                              "Enter to the app",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'inter',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
+                         )
                           
                         ],
                       ),
@@ -160,50 +259,51 @@ storageData.write('Booked', []);
 
 
         Container(
-          alignment:const Alignment(0, 0.9),
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          alignment:const Alignment(0, -0.85),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              Islastpage ?
-                const SizedBox(width: 35,):
+              IsFirstPage ?
+                const SizedBox(width: 40,):
                 GestureDetector(
-                  onTap: () {
-                    Get.offAllNamed('/initialScreen');
-                  },
-                  child:const Text('Skip',style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),)),
-
-              SmoothPageIndicator(
-                controller: _controler, 
-                count: 3,
-                  effect:const ExpandingDotsEffect(
-                  dotHeight: 10,
-                  dotWidth: 10,
-                  activeDotColor: Colors.black,
-                  dotColor: Colors.grey,
-                  expansionFactor: 3, // How much the active dot expands
-                  spacing: 8, // Spacing between dots
-                ),
-                
-                ),
-
-
-                Islastpage?
-                  GestureDetector(
                     onTap: () {
-                    isFirstOpenReset();
-                    Get.offAllNamed('/initialScreen');
+                      _controler.previousPage(duration:const Duration(milliseconds: 300), curve:Curves.easeIn);
+              
                   },
-                    child:const Text('Done',style: TextStyle(  
-                      fontWeight: FontWeight.bold                 
-                    ),)):
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal:10,vertical: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child:const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.keyboard_double_arrow_left_rounded),
+                        Text('Back',style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'inter'
+                ),)
+                      ],
+                    ),
+                  )),
+
+    
+
+
+               
                     GestureDetector(
                     onTap: () {
-                      _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.easeIn);
+                      if(IsLastPage){
+                        Get.offNamed('/initialScreen');
+                      }else{
+                      _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.easeIn); }
                     },
-                    child:const Text('Next',style: TextStyle(
+                    child:const Text('Skip',style: TextStyle(
                       fontWeight: FontWeight.bold
                     ),))
             ],

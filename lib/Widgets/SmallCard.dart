@@ -29,7 +29,7 @@ class DateFormatter {
   }
 }
 
-Widget SmallCard(context, data,index) {
+Widget SmallCard(context, data,index,search) {
   final storageData = GetStorage();
 
 
@@ -53,15 +53,13 @@ isBookmarkedRx.value = isBookmarked();
         'title': data['title']['rendered'],
         'content': data['content']['rendered'],
         "date": data['date'],
-        "image": data['jetpack_featured_media_url']
+        "image": data['jetpack_featured_media_url'],
+        'Link':data['link']
       });
     }
     storageData.write('Booked', Booked);
-    // Update the reactive state
     isBookmarkedRx.value = !isBookmarkedRx.value;
   }
-
-
 
 
 
@@ -72,10 +70,10 @@ return Column(
   children: [
 if(index % 3 == 0)
       SizedBox(
-        height: AdSize.banner.height.toDouble(),
-        width: AdSize.banner.width.toDouble(),
+height: 250,
+        width: MediaQuery.of(context).size.width,
         child: AdWidget(
-          ad: AdMobHelper.getBannerAd()..load(),
+ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
           key: UniqueKey(),
         ),
       ),
@@ -131,7 +129,7 @@ if(index % 3 == 0)
                           ),
                         ),
                         child: Text(
-                          'Popular ',
+                          search,
                           style: TextStyle(color: Colors.grey[700]),
                         ),
                       ),

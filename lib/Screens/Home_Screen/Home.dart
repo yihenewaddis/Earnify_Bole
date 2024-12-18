@@ -15,6 +15,7 @@ import 'package:earnify_bole/Screens/Home_Screen/Notification.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,6 +25,14 @@ class HomeScreen extends StatelessWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final catagoryController = Get.put(CategoryController());
 final NotificationController _NotificationController = Get.put(NotificationController());
+
+Future<void> onLounchUrl(String url) async{
+final Uri Singleurl = Uri.parse(url);
+if(!await launchUrl(Singleurl)){
+  throw Exception('error in the link');
+}
+}
+
     return DefaultTabController(
 length:11, 
       child: Scaffold(
@@ -229,42 +238,44 @@ length:11,
               iconColor: Colors.black,
               leading:const Icon(Icons.person_2_outlined),
               title:const Text('About us'),
-              onTap: (){},
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/about-us/'),
             ),
             ListTile(
               textColor: Colors.black,
               iconColor: Colors.black,
               leading:const Icon(Icons.link),
               title:const Text('Website'),
-              onTap: (){},
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/privacy-policy/'),
             ),
             ListTile(
               textColor: Colors.black,
               iconColor: Colors.black,
               leading:const Icon(Icons.facebook),
               title:const Text('FaceBook'),
-              onTap: (){},
-            ),
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.handshake),
-              title:const Text('Support'),
-              onTap: (){},
+              onTap: ()=>onLounchUrl('https://facebook.com/bolenav/'),
             ),
             ListTile(
               textColor: Colors.black,
               iconColor: Colors.black,
               leading:const Icon(Icons.email_outlined),
               title:const Text('Contact as'),
-              onTap: (){},
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/contact-us/'),
             ),
+            
             ListTile(
               textColor: Colors.black,
               iconColor: Colors.black,
-              leading:const Icon(Icons.settings),
-              title:const Text('Setting'),
-              onTap: (){},
+              leading:const Icon(Icons.contrast_outlined),
+              title:const Text('Term and condition'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/terms-and-conditions/'),
+            ),
+            
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.perm_device_info),
+              title:const Text('Disclaimer'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/disclaimer/'),
             ),
           ],
         ),

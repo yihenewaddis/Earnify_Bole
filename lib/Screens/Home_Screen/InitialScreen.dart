@@ -48,7 +48,7 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
 height: 60, 
 width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
     alignment: Alignment.center,
-    child: AdWidget(ad: AdMobHelper.getBannerAd()..load(),
+child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
     key: UniqueKey(),
 ),
     
