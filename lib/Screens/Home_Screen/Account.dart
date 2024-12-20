@@ -1,5 +1,7 @@
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -31,51 +33,10 @@ if(!await launchUrl(Singleurl)){
       body:SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              margin: EdgeInsets.only(top: 10),
-              color: Colors.white,
-              child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('General Setting',style: TextStyle(
-                    fontFamily: 'inter',
-                    fontSize: 20,
-                    color: Colors.grey[900],
-                    fontWeight: FontWeight.bold
-                  ),),
-                  SizedBox(height: 20,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                           Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Icon(Icons.notifications_none_outlined,color: Colors.white,),
-                           ),
-                           SizedBox(width: 10,),
-                      Text('Get Notifications',style: TextStyle(
-                        fontFamily: 'inter',
-                        fontSize: 17,
-                      ),),
-                        ],
-                      ),
-                      Switch(value: is_swiched, onChanged: (value){
-                        setState(() {
-                          is_swiched =value;
-                        });
-                      })
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: 20,),
+            
+
+
+
            Container(
               padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               margin: EdgeInsets.only(top: 10),
@@ -245,6 +206,7 @@ if(!await launchUrl(Singleurl)){
                 ],
               ),
             ),
+
           ],
         ),
       ),

@@ -14,6 +14,7 @@ import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Controlers/SportController.dart';
 import 'package:earnify_bole/Controlers/Techcontroller.dart';
 import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
@@ -89,9 +90,23 @@ if(index % 3 == 0 && index !=0)
       SizedBox(
 height:250,
 width: MediaQuery.of(context).size.width.toDouble(),
-        child: AdWidget(
-ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
-          key: UniqueKey(),
+        child: Stack(
+          children: [
+            
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Center(
+                child: Text('AD'),
+              ),
+            ),
+            AdWidget(
+            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
+              key: UniqueKey(),
+            ),
+          ],
         ),
       ),
   SizedBox(height: 10,),

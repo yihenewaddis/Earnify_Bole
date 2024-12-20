@@ -1,6 +1,7 @@
 import 'package:earnify_bole/Service/WordPressApiService.dart';
 import 'package:get/get.dart';
 import '../Controlers/BaseController.dart';
+import 'package:get_storage/get_storage.dart';
 class AllController extends BaseController{
 
 
@@ -18,6 +19,8 @@ final AllData = <dynamic>[].obs;
   @override
   void onInit(){
     super.onInit();
+     final storage = GetStorage();
+  storage.write('isFirstOpen', true);
     fetchAllData(Page.value,endpoint.value);
   }
   

@@ -1,29 +1,29 @@
 {
-    "project_info": {
-      "project_number": "526662599856",
-      "project_id": "earnifybole",
-      "storage_bucket": "earnifybole.firebasestorage.app"
-    },
-    "client": [
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:526662599856:android:a2d149003ac731a5732775",
-          "android_client_info": {
-            "package_name": "com.bolenav.blog"
-          }
-        },
-        "oauth_client": [],
-        "api_key": [
-          {
-            "current_key": "AIzaSyA9Rp1oS_JB7WDVwmdvxQKkWnY1yTlQE84"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": []
-          }
+  "project_info": {
+    "project_number": "607485914650",
+    "project_id": "earnify-bole-f1c09",
+    "storage_bucket": "earnify-bole-f1c09.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607485914650:android:e128ecbf39191c62d2eba3",
+        "android_client_info": {
+          "package_name": "com.bolenav.blog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChoouoKwe9rNrcqnQLmi7CY_-XwtiF7fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
-    ],
-    "configuration_version": "1"
-  }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,10 @@
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
 import 'package:earnify_bole/Widgets/SmallCardForBookMark.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 class DateFormatter {
   static String getRelativeTime(String dateString) {
     DateTime date = DateTime.parse(dateString);
@@ -53,12 +55,30 @@ onTap: ()=>bookMarkedController.clearAll(),
       backgroundColor: Colors.grey[100],
       body: Padding(
 padding: EdgeInsets.only(top: 20),
-child: Obx(()=> ListView.builder(
-  itemCount: bookMarkedController.Booked.length,
-itemBuilder: (context,index){
-return SmallCardForBookMark(context,bookMarkedController.Booked[index],index);}
-,
-      ),
+child: Stack(
+  children: [
+    Obx(()=> ListView.builder(
+      itemCount: bookMarkedController.Booked.length,
+    itemBuilder: (context,index){
+    return SmallCardForBookMark(context,bookMarkedController.Booked[index],index);}
+    ,
+          ),
+    ),
+            Positioned(
+  bottom: 2,
+  left: 0,
+  right: 0,
+  child: Container(
+height: 60, 
+width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
+    alignment: Alignment.center,
+child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
+    key: UniqueKey(),
+),
+    
+  ),
+),
+  ],
 )));
   }
 }

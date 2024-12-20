@@ -4,16 +4,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdMobHelper{
-  static String get bannerUnitId =>'ca-app-pub-3940256099942544/6300978111';
-  static String get interstitialUnitId =>'ca-app-pub-3940256099942544/1033173712';
+  static String get bannerUnitId =>'ca-app-pub-8947749455671018/1360182738';
+  static String get interstitialUnitId =>'ca-app-pub-8947749455671018/6122950057';
   static String get rewardedUnitId =>'ca-app-pub-3940256099942544/5224354917';
   static String get nativeUnitId =>'ca-app-pub-3940256099942544/2247696110';
 bool isInterstitialAdReady = false;
+bool IsBannerAdRedy = false;
 InterstitialAd? interstitialAd;
 int numOfAttempts = 0;
   static initialization(){
 if(MobileAds.instance==null){
-       MobileAds.instance.initialize();
+      MobileAds.instance.initialize();
     }
   }
 
@@ -69,6 +70,7 @@ isInterstitialAdReady = false;
 static BannerAd getBannerAd(context, {double? width, double? height}){
 BannerAd bAd =  BannerAd(size: AdSize(width: width?.toInt() ?? AdSize.banner.width, height: height?.toInt() ?? AdSize.banner.height), adUnitId: bannerUnitId, listener: BannerAdListener(
         onAdLoaded: (Ad ad){
+          
           print('add loaded');
         },
         onAdFailedToLoad: (Ad ad ,LoadAdError error){

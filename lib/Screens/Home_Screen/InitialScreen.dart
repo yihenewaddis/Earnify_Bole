@@ -39,21 +39,7 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
         body: Stack(
       children: [
         Pages[selectedIndex],
-        
-          Positioned(
-  bottom: 2,
-  left: 0,
-  right: 0,
-  child: Container(
-height: 60, 
-width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
-    alignment: Alignment.center,
-child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
-    key: UniqueKey(),
-),
-    
-  ),
-),
+ 
       ],
 ),
         bottomNavigationBar: Padding(

@@ -72,9 +72,23 @@ if(index % 3 == 0)
       SizedBox(
 height: 250,
         width: MediaQuery.of(context).size.width,
-        child: AdWidget(
-ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
-          key: UniqueKey(),
+        child:  Stack(
+          children: [
+            
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Center(
+                child: Text('AD'),
+              ),
+            ),
+            AdWidget(
+            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
+              key: UniqueKey(),
+            ),
+          ],
         ),
       ),
   SizedBox(height: 10,),

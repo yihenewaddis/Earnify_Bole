@@ -1,3 +1,4 @@
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
 import 'package:earnify_bole/Controlers/NotificationController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Ai.dart';
@@ -15,6 +16,7 @@ import 'package:earnify_bole/Screens/Home_Screen/Notification.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,7 +40,84 @@ length:11,
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.grey[100],
-        
+         drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              height: 230,
+              color: Colors.grey[200],
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(image: AssetImage('assets/logo.png'),width: 40,height: 40,),
+                        Text(' EARNIFY BOLE',style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.bold,  
+                        ),),
+                        
+                      ],
+                    ),
+                    Text('App Version: 1.0.1')
+                  ],
+                  
+                ),
+            ),
+            const SizedBox(height: 10,),
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.person_2_outlined),
+              title:const Text('About us'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/about-us/'),
+            ),
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.link),
+              title:const Text('Website'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com'),
+            ),
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.facebook),
+              title:const Text('FaceBook'),
+              onTap: ()=>onLounchUrl('https://facebook.com/bolenav/'),
+            ),
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.email_outlined),
+              title:const Text('Contact us'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/contact-us/'),
+            ),
+            
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.contrast_outlined),
+              title:const Text('Term and condition'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/terms-and-conditions/'),
+            ),
+            
+            ListTile(
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              leading:const Icon(Icons.perm_device_info),
+              title:const Text('Disclaimer'),
+              onTap: ()=>onLounchUrl('https://blog.bolenav.com/disclaimer/'),
+            ),
+          ],
+        ),
+      ),
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -81,53 +160,7 @@ length:11,
               const SearchScreen()),
             child:const Icon(Icons.search,size: 30,weight: 10,color: Colors.black,)),
           const SizedBox(width: 15,),
-
-          GestureDetector(
-            onTap: ()=>{
-  Get.delete<NotificationController>(),
-      Get.to(
-              transition: Transition.downToUp,
-              duration:const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              fullscreenDialog: true,
-              const NotificationScreen())},
-            child: Stack(
-              children: [
-                const Icon(Icons.notifications_none, size: 30, color: Colors.black),
-                Obx(() => _NotificationController.unreadCount.value > 0
-                  ? Positioned(
-                      right: 0,
-                      top: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        constraints: const BoxConstraints(
-                          minWidth: 14,
-                          minHeight: 14,
-                        ),
-                        child: Text(
-                          '${_NotificationController.unreadCount.value}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 8,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    )
-                  : Container(
-                    height: 0,
-                    width: 0,
-                  ),
-                ),
-              ],
-            ),
-          ),
           const SizedBox(width: 15,),
-
         ],
 
     bottom:  TabBar(
@@ -185,101 +218,43 @@ length:11,
               
             ),
           ],
-          body:const TabBarView(children: [
-          All(),
-          AI(),
-          AndroidApps(),
-          AndroidTips(),
-          BestWebsite(),
-          Crypto(),
-          Earnify(),
-          EarningApps(),
-          Forex(),
-          Sport(),
-          Tech()
-        ]),
+          
+          body:Stack(
+            children: [
+              const TabBarView(children: [
+              All(),
+              AI(),
+              AndroidApps(),
+              AndroidTips(),
+              BestWebsite(),
+              Crypto(),
+              Earnify(),
+              EarningApps(),
+              Forex(),
+              Sport(),
+              Tech()
+                      ]),
+          Positioned(
+  bottom: 2,
+  left: 0,
+  right: 0,
+  child: Container(
+height: 60, 
+width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
+    alignment: Alignment.center,
+child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
+    key: UniqueKey(),
+),
+    
+  ),
+),
+            ],
+          ),
         ),
 
 
 
-      drawer: Drawer(
-        backgroundColor: Colors.white,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Container(
-              height: 230,
-              color: Colors.grey[200],
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(image: AssetImage('assets/logo.png'),width: 40,height: 40,),
-                        Text(' EARNIFY BOLE',style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          letterSpacing: 0,
-                          fontWeight: FontWeight.bold,  
-                        ),),
-                        
-                      ],
-                    ),
-                    Text('App Version: 1.0.1')
-                  ],
-                  
-                ),
-            ),
-            const SizedBox(height: 10,),
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.person_2_outlined),
-              title:const Text('About us'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/about-us/'),
-            ),
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.link),
-              title:const Text('Website'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/privacy-policy/'),
-            ),
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.facebook),
-              title:const Text('FaceBook'),
-              onTap: ()=>onLounchUrl('https://facebook.com/bolenav/'),
-            ),
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.email_outlined),
-              title:const Text('Contact as'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/contact-us/'),
-            ),
-            
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.contrast_outlined),
-              title:const Text('Term and condition'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/terms-and-conditions/'),
-            ),
-            
-            ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
-              leading:const Icon(Icons.perm_device_info),
-              title:const Text('Disclaimer'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/disclaimer/'),
-            ),
-          ],
-        ),
-      ),
+     
 
       ));
       

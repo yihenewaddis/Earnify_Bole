@@ -1,7 +1,9 @@
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:get/get.dart';
 
@@ -53,64 +55,84 @@ const Text('Trending',style: TextStyle(
                     ),
       ),
       backgroundColor: Colors.grey[100],
-      body: SmartRefresher(
-        controller: _refreshController,
-        onRefresh: _onRefresh,
-        onLoading: _onLoading,
-        enablePullDown: true,
-        enablePullUp: true,
-        child: SingleChildScrollView(
-          child: Column(
-              children: [
-            
-              
-            
-              // couresel page
-        
-
-              
-        
-            
-
-            
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+      body: Stack(
+        children: [
+          SmartRefresher(
+            controller: _refreshController,
+            onRefresh: _onRefresh,
+            onLoading: _onLoading,
+            enablePullDown: true,
+            enablePullUp: true,
+            child: SingleChildScrollView(
               child: Column(
-                children: [
-                      
-        
-                    
-                    const SizedBox(height: 15,),
-                    
-Obx(() => (controller.PopularData.isEmpty)?
-                Column(
                   children: [
-shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                  ],
-                ):
-
-                Column(
-                      children: List.generate(
-              controller.PopularData.length,
-  (index) => BigCard(context,controller.PopularData[index],index,'Trending')
-                      ),
-                    ),
+                
+                  
+                
+                  // couresel page
+            
+          
+                  
+            
+                
+          
+                
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    children: [
+                          
+            
                         
+                        const SizedBox(height: 15,),
+                        
+          Obx(() => (controller.PopularData.isEmpty)?
+                    Column(
+                      children: [
+          shimmerEffect_2(context),
+                        SizedBox(height: 10,),
+                        shimmerEffect_2(context),
+                        SizedBox(height: 10,),
+                        shimmerEffect_2(context),
+                        SizedBox(height: 10,),
+                        shimmerEffect_2(context),
+                      ],
+                    ):
+          
+                    Column(
+                          children: List.generate(
+                  controller.PopularData.length,
+            (index) => BigCard(context,controller.PopularData[index],index,'Trending')
+                          ),
+                        ),
+                            
+                        ),
+                        
+                        const SizedBox(height: 20,),
+                        ],
+                      )
                     ),
-                    
-                    const SizedBox(height: 20,),
-                    ],
-                  )
-                )
-              ],
+                           
+            
+                  ],
+                ),
             ),
-        ),
+          ),
+                  Positioned(
+  bottom: 2,
+  left: 0,
+  right: 0,
+  child: Container(
+height: 60, 
+width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
+    alignment: Alignment.center,
+child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
+    key: UniqueKey(),
+),
+    
+  ),
+),
+        ],
       ),
 );
   }
