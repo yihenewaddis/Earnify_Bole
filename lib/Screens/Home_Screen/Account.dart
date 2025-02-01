@@ -33,11 +33,8 @@ if(!await launchUrl(Singleurl)){
       body:SingleChildScrollView(
         child: Column(
           children: [
-            
 
-
-
-           Container(
+          Container(
               padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               margin: EdgeInsets.only(top: 10),
               color: Colors.white,

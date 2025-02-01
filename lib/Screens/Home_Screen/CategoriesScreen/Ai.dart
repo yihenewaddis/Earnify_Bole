@@ -1,10 +1,12 @@
 import 'package:earnify_bole/Controlers/AiController.dart';
+import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Trending.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
+import 'package:earnify_bole/Widgets/GridCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:earnify_bole/Widgets/SmallCard.dart';
@@ -47,6 +49,7 @@ class AI extends StatelessWidget {
         RefreshController(initialRefresh: false);
 
     final controller = Get.put(AiController());
+    final AllPostController = Get.find<AllController>();
     void _onRefresh() async {
       controller.AiData.value = [];
       await controller.fetchAiData(1, 12);
@@ -92,12 +95,37 @@ class AI extends StatelessWidget {
                     SizedBox(height: 10,),
                     shimmerEffect_2(context),
                   ],
-                ): Column(
+                ):  Obx(
+                        () => (controller.AiData.isEmpty)
+                            ? shimmerEffect_2(context)
+                            : AllPostController.IsGrid.value? GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.8,
+                            ),
+                            itemCount: controller.AiData.length,
+                            itemBuilder: (context, index) {
+                              return GridCard(
+                                context,
+                                controller.AiData[index],
+                                index,
+                                'AI',
+                              );
+                            },
+                          ):
+                            Column(
                                 children: List.generate(
-                                  controller.AiData.length,
-          (index) => BigCard(context, controller.AiData[index], index,'AI'),
+                                controller.AiData.length,
+                              (index) =>BigCard(context,
+                          controller.AiData[index],index ,'AI'),
                                 ),
                               ),
+                      ),
+                
+      
                       ),
                       const SizedBox(
                         height: 20,

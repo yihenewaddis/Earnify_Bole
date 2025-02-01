@@ -1,4 +1,5 @@
 import 'package:earnify_bole/AdMobHelper.dart';
+import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
 import 'package:earnify_bole/Controlers/NotificationController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Ai.dart';
@@ -12,11 +13,9 @@ import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/EarningApps.da
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Forex.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Sport.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Tech.dart';
-import 'package:earnify_bole/Screens/Home_Screen/Notification.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,7 +26,7 @@ class HomeScreen extends StatelessWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final catagoryController = Get.put(CategoryController());
 final NotificationController _NotificationController = Get.put(NotificationController());
-
+  final AllPostController = Get.put(AllController());
 Future<void> onLounchUrl(String url) async{
 final Uri Singleurl = Uri.parse(url);
 if(!await launchUrl(Singleurl)){
@@ -47,7 +46,7 @@ length:11,
           children: [
             Container(
               height: 230,
-              color: Colors.grey[200],
+              color:  Color(0xFFA4634E),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,7 +56,7 @@ length:11,
                       children: [
                         Image(image: AssetImage('assets/logo.png'),width: 40,height: 40,),
                         Text(' EARNIFY BOLE',style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 25,
                           letterSpacing: 0,
                           fontWeight: FontWeight.bold,  
@@ -65,52 +64,54 @@ length:11,
                         
                       ],
                     ),
-                    Text('App Version: 1.0.1')
+                    Text('App Version: 1.0.1',style: TextStyle(
+                      color: Colors.white
+                    ),)
                   ],
                   
                 ),
             ),
             const SizedBox(height: 10,),
             ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
+              textColor: Color(0xFFA4634E),
+              iconColor: Color(0xFFA4634E),
               leading:const Icon(Icons.person_2_outlined),
               title:const Text('About us'),
               onTap: ()=>onLounchUrl('https://blog.bolenav.com/about-us/'),
             ),
             ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
+              textColor: Color(0xFFA4634E),
+              iconColor: Color(0xFFA4634E),
               leading:const Icon(Icons.link),
               title:const Text('Website'),
               onTap: ()=>onLounchUrl('https://blog.bolenav.com'),
             ),
             ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
+              textColor: Color(0xFFA4634E),
+              iconColor: Color(0xFFA4634E),
               leading:const Icon(Icons.facebook),
               title:const Text('FaceBook'),
               onTap: ()=>onLounchUrl('https://facebook.com/bolenav/'),
             ),
             ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
+              textColor: Color(0xFFA4634E),
+              iconColor: Color(0xFFA4634E),
               leading:const Icon(Icons.email_outlined),
               title:const Text('Contact us'),
               onTap: ()=>onLounchUrl('https://blog.bolenav.com/contact-us/'),
             ),
             
             ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
+              textColor: Color(0xFFA4634E),
+              iconColor: Color(0xFFA4634E),
               leading:const Icon(Icons.contrast_outlined),
               title:const Text('Term and condition'),
               onTap: ()=>onLounchUrl('https://blog.bolenav.com/terms-and-conditions/'),
             ),
             
             ListTile(
-              textColor: Colors.black,
-              iconColor: Colors.black,
+              textColor: Color(0xFFA4634E),
+              iconColor: Color(0xFFA4634E),
               leading:const Icon(Icons.perm_device_info),
               title:const Text('Disclaimer'),
               onTap: ()=>onLounchUrl('https://blog.bolenav.com/disclaimer/'),
@@ -160,24 +161,36 @@ length:11,
               const SearchScreen()),
             child:const Icon(Icons.search,size: 30,weight: 10,color: Colors.black,)),
           const SizedBox(width: 15,),
+          GestureDetector(
+                            onTap: () => AllPostController.ChangeLayout(),
+                            child: Obx(() => Icon(
+                              (AllPostController.IsGrid.value)
+                                  ? Icons.grid_view
+                                  : Icons.line_style_rounded,
+                              color: Colors.black,
+                              size: 30,
+                            )),
+                          ),
           const SizedBox(width: 15,),
+
+        
         ],
 
     bottom:  TabBar(
               tabAlignment: TabAlignment.center,        
-              labelColor: Colors.black,
+              labelColor: Color(0xFFA4634E),
               labelStyle:const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500
+                fontWeight: FontWeight.w800
               ),
               unselectedLabelStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-              color:Colors.grey[500]
+              color:Colors.grey[800]
               ),
               isScrollable: true,
               padding: EdgeInsets.all(0),
-              indicatorColor: Colors.black,
+              indicatorColor: Color(0xFFA4634E),
               indicatorPadding: EdgeInsets.zero, 
               tabs:const [
               Tab(
@@ -234,20 +247,7 @@ length:11,
               Sport(),
               Tech()
                       ]),
-          Positioned(
-  bottom: 2,
-  left: 0,
-  right: 0,
-  child: Container(
-height: 60, 
-width: MediaQuery.of(context).size.width,// Add a fixed height for the banner ad
-    alignment: Alignment.center,
-child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
-    key: UniqueKey(),
-),
-    
-  ),
-),
+ 
             ],
           ),
         ),

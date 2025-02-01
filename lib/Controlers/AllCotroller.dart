@@ -7,7 +7,8 @@ class AllController extends BaseController{
 
     RxInt CurrentPageIndex = 0.obs;
     RxInt Page = 1.obs;
-RxInt PageForMorData =1.obs;
+    RxBool IsGrid = false.obs;
+    RxInt PageForMorData =1.obs;
     // 12 means Ai id
     RxInt endpoint = 0.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
@@ -15,6 +16,12 @@ final AllData = <dynamic>[].obs;
     void changeCurrentIndex(int index){
       CurrentPageIndex.value = index;
     }
+
+
+    void ChangeLayout(){
+      IsGrid.value = !IsGrid.value;
+    }
+
 
   @override
   void onInit(){

@@ -46,10 +46,9 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
           padding:
               const EdgeInsets.only(left: 15, right: 15, bottom: 8, top: 5),
           child:GNav(
-            backgroundColor: Colors.white,
-            color: Colors.grey[600],
+            color: Color(0xFFA4634E),
             iconSize: 27,
-            activeColor: Colors.black,
+            activeColor: Colors.white,
             selectedIndex: selectedIndex,
             onTabChange: (index) {
               setState(() {
@@ -59,7 +58,7 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
             duration: const Duration(milliseconds: 500),
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             gap: 8,
-            tabBackgroundColor: const Color.fromARGB(255, 236, 235, 235),
+            tabBackgroundColor: Color(0xFFA4634E),
             tabs: const [
               GButton(
                 icon: Icons.home_rounded,
@@ -70,7 +69,6 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
                 text: 'Trending',
                 iconActiveColor: Colors.red,
                 iconColor: Colors.red,
-                textColor: Colors.red,
               ),
               GButton(
                 icon: Icons.bookmark_outline,

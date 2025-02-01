@@ -8,6 +8,7 @@ import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Trending.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
+import 'package:earnify_bole/Widgets/GridCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:earnify_bole/Widgets/SmallCard.dart';
@@ -52,7 +53,7 @@ class All extends StatelessWidget {
     final Popularcontroller = Get.put(PopularController());
     final DetailControllers = Get.put(DetailController());
     final bookMarkedController = Get.put(BookMarkedController());
-    final AllPostController = Get.put(AllController());
+    final AllPostController = Get.find<AllController>();
     void _onRefresh() async {
       AllPostController.AllData.value = [];
       await AllPostController.fetchAllData(1, 0);
@@ -68,7 +69,7 @@ class All extends StatelessWidget {
     }
 AdMobHelper adMobHelper = AdMobHelper();
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: SmartRefresher(
         controller: _refreshController,
         onRefresh: _onRefresh,
@@ -86,7 +87,7 @@ AdMobHelper adMobHelper = AdMobHelper();
               Obx(() => (AllPostController.AllData.isEmpty)
                   ? shimmerEffect_2(context)
                   : SizedBox(
-                      height: 220,
+                      height: 150,
                       width: double.infinity,
                       child: PageView.builder(
                           onPageChanged: (index) {
@@ -133,12 +134,9 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                           width:
                                               MediaQuery.of(context).size.width,
                                           height: 120,
-                                          decoration: BoxDecoration(
-                                              color:
-                                                  Colors.black.withOpacity(0.5),
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
+                                          
                                           child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               SizedBox(height: 10),
                                               Container(
@@ -155,7 +153,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                          FontWeight.w900,
                                                       fontSize: 18,
                                                       color: Colors.grey[100]),
                                                 ),
@@ -163,45 +161,20 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                               SizedBox(
                                                 height: 5,
                                               ),
+                                            
                                               Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                child: Text(
-                                                  'All Posts ',
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.grey[100],
-                                                    fontWeight: FontWeight.w200,
-                                                    fontSize: 15,
-                                                  ),
+                                                padding: EdgeInsets.all(10),
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFFA4634E),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+
                                                 ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.watch_later_outlined,
-                                                    color: Colors.grey[100],
-                                                    size: 15,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    DateFormatter
-                                                        .getRelativeTime(
-                                                            AllPostController
-                                                                    .AllData[
-                                                                index]['date']),
-                                                    style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        color:
-                                                            Colors.grey[100]),
-                                                  )
-                                                ],
-                                              ),
+                                                child:  Text('Red More',style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold
+                                                ),),
+                                              )
                                             ],
                                           ),
                                         ))
@@ -237,7 +210,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                   shape: BoxShape.rectangle,
                                   color:
                                       (AllPostController.CurrentPageIndex == i)
-                                          ? Colors.black
+                                          ? Color(0xFFA4634E)
                                           : Colors.grey[500],
                                   borderRadius: BorderRadius.circular(20)),
                             )),
@@ -263,7 +236,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                 width: 5,
                                 height: 25,
                                 decoration: BoxDecoration(
-                                    color: Colors.black,
+                                    color: Color(0xFFA4634E),
                                     borderRadius: BorderRadius.circular(10)),
                               ),
                               const SizedBox(
@@ -272,6 +245,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                               const Text(
                                 'Popular News',
                                 style: TextStyle(
+                                  color: Color(0xFFA4634E),
                                     fontSize: 20, fontWeight: FontWeight.w700),
                               )
                             ],
@@ -282,19 +256,17 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
                                 TrendingScreen()),
-                            child: Text(
-                              'View All   ',
-                              style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
+                            child: Icon(
+                              Icons.arrow_forward_rounded,
+                              color: Color(0xFFA4634E),
+                              size: 30,
                             ),
                           )
                         ],
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 5,),
                    SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Obx(
                         () => (Popularcontroller.PopularData.isEmpty)
@@ -311,47 +283,75 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                   shimmerEffect_2(context)
                                 ],
                               )
-                            : Column(
-                                children: List.generate(
-                                    (Popularcontroller.PopularData.length > 5)
-                                        ? 5
-                                        : Popularcontroller.PopularData.length,
-                                (index) => Column(
-                                  children: [
-   
-    // Original GestureDetector
-    GestureDetector(
-      onTap: () {
-         adMobHelper.createInterstitialAd();
-         final popularController = Get.find<PopularController>();
-         DetailControllers.Relateddata.value = popularController.PopularData;
-        DetailControllers.data.value = {
-          'id': Popularcontroller.PopularData[index]['id'],
-          'title': Popularcontroller.PopularData[index]['title']['rendered'],
-          'content': Popularcontroller.PopularData[index]['content']['rendered'],
-          'date': Popularcontroller.PopularData[index]['date'],
-          'image': Popularcontroller.PopularData[index]['jetpack_featured_media_url'],
-          'Link':Popularcontroller.PopularData[index]['link']
-        };
-        Get.toNamed('/detail');
-      },
-      child: SmallCard(
-        context,
-        Popularcontroller.PopularData[index],
-        index,
-        'Popular'
-      ),
-    ),
-                                  ],
-                                )),
-                              ),
+            :   SizedBox(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+              height: 260, 
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: (Popularcontroller.PopularData.length > 5)
+                                          ? 5
+                                          : Popularcontroller.PopularData.length,
+                itemBuilder:   (context, index) {
+                return Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        adMobHelper.createInterstitialAd();
+                        final popularController = Get.find<PopularController>();
+                        DetailControllers.Relateddata.value = popularController.PopularData;
+                        DetailControllers.data.value = {
+                          'id': Popularcontroller.PopularData[index]['id'],
+                          'title': Popularcontroller.PopularData[index]['title']['rendered'],
+                          'content': Popularcontroller.PopularData[index]['content']['rendered'],
+                          'date': Popularcontroller.PopularData[index]['date'],
+                          'image': Popularcontroller.PopularData[index]['jetpack_featured_media_url'],
+                          'Link':Popularcontroller.PopularData[index]['link']
+                        };
+                        Get.toNamed('/detail');
+                      },
+                      child: SmallCard(
+                        context,
+                        Popularcontroller.PopularData[index],
+                        index,
+                        'Popular'
                       ),
+                    ),
+                    
+                  ],
+                );
+              },
+               ),
+            ),),
+
+
+
+
+
+                
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
+                          Row(
+                            children: [
+                              Container(
                             width: 5,
                             height: 25,
                             decoration: BoxDecoration(
@@ -366,25 +366,52 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w700),
                           )
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () => AllPostController.ChangeLayout(),
+                            child: Obx(() => Icon(
+                              (AllPostController.IsGrid.value)
+                                  ? Icons.grid_view
+                                  : Icons.line_style_rounded,
+                              color: Colors.black,
+                              size: 30,
+                            )),
+                          )
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+              
+              
                       Obx(
                         () => (AllPostController.AllData.isEmpty)
                             ? shimmerEffect_2(context)
-                            : Column(
+                            : AllPostController.IsGrid.value? GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.8,
+                            ),
+                            itemCount: AllPostController.AllData.length,
+                            itemBuilder: (context, index) {
+                              return GridCard(
+                                context,
+                                AllPostController.AllData[index],
+                                index,
+                                'All',
+                              );
+                            },
+                          ):
+                            Column(
                                 children: List.generate(
                                   AllPostController.AllData.length,
-                              (index) => BigCard(context,
-                                  AllPostController.AllData[index],index ,'All'),
+                              (index) =>BigCard(context,
+                          AllPostController.AllData[index],index ,'All'),
                                 ),
                               ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+
                     ],
                   ))
             ],

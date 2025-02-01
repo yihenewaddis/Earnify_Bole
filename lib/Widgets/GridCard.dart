@@ -46,14 +46,13 @@ class DateFormatter {
   }
 }
 
-Widget BigCard(context, data,int index, catagory) {
+Widget GridCard(context, data,int index, catagory) {
   final DetailControllers = Get.find<DetailController>();
   final bookMarkedController = Get.find<BookMarkedController>();
   final storageData = GetStorage();
   
 AdMobHelper adMobHelper = AdMobHelper();
 
-  
   final isBookmarkedRx = false.obs;
 bool isBookmarked() {
     List Booked = storageData.read('Booked') ?? [];
@@ -81,44 +80,12 @@ isBookmarkedRx.value = isBookmarked();
     isBookmarkedRx.value = !isBookmarkedRx.value;
   }
 
-
-
-
-
 return Column(
   children: [
-    
-if(index % 3 == 0 && index !=0)
-
-      SizedBox(
-height:130,
-width: MediaQuery.of(context).size.width.toDouble(),
-        child: Stack(
-          children: [
-            SizedBox(height: 10,),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Center(
-                child: Text('AD'),
-              ),
-            ),
-            AdWidget(
-            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 130)..load(),
-              key: UniqueKey(),
-            ),
-          ],
-        ),
-      ),
-  SizedBox(height: 10,),
-
     Container(
       padding: EdgeInsets.all(5),
-      margin: EdgeInsets.only(bottom: 2),
       width: MediaQuery.of(context).size.width,
-height: 120,
+height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
@@ -197,22 +164,21 @@ DetailControllers.Relateddata.value = techController.TechData;
           
 
         },
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: SizedBox(
-                  width: 100,
-                  height: 180,
+                  width: double.infinity,
+                  height: 250,
                   child: imageEnhanced(data['jetpack_featured_media_url'])),
             ),
             SizedBox(
               width: 5,
             ),
-        
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Column(
               children: [
                 Text(
@@ -224,30 +190,12 @@ DetailControllers.Relateddata.value = techController.TechData;
                   fontSize: 15,
                 ),
               ),
-              SizedBox(height: 3,),
-              Text(
-                // Extract just the text from the first paragraph
-                RegExp(r"<p>(.*?)</p>")
-                        .firstMatch(data['content']['rendered'])
-                        ?.group(1)
-                        ?.replaceAll(RegExp(r'<[^>]*>'), '') ??
-                    '',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 12,
-                  height: 1.4,
-                ),
-              ),
+      
               SizedBox(
                 height: 5,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    
                     children: [
                   Icon(Icons.person, size: 15, color: Color(0xFFA4634E)),
                   SizedBox(width: 5,),
@@ -260,6 +208,9 @@ DetailControllers.Relateddata.value = techController.TechData;
                       )
                     ],
                   ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -66,12 +66,13 @@ isBookmarkedRx.value = isBookmarked();
 
 
 
-return Column(
+return Row(
   children: [
-if(index % 3 == 0)
+    SizedBox(width: 5,),
+if(index==2)
       SizedBox(
 height: 250,
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width-180,
         child:  Stack(
           children: [
             
@@ -85,114 +86,121 @@ height: 250,
               ),
             ),
             AdWidget(
-            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
+            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width-180.toDouble(),height: 250)..load(),
               key: UniqueKey(),
             ),
           ],
         ),
       ),
-  SizedBox(height: 10,),
-    Container(
-    width: MediaQuery.of(context).size.width,
-    height: 170,
-    padding: EdgeInsets.all(8),
-    margin: EdgeInsets.only(bottom: 15),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(5),
-      boxShadow: [
-        BoxShadow(
-          color: const Color.fromARGB(255, 218, 217, 217).withOpacity(0.5),
-          spreadRadius: 1,
-          blurRadius: 10,
-          offset: Offset(1, 2),
-        ),
-      ],
-    ),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              flex: 4,
-              child: Container(
-                width: MediaQuery.of(context).size.width - 100,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      data['title']['rendered'],
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white,
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 238, 238, 238),
-                            width: 2,
-                          ),
-                        ),
-                        child: Text(
-                          search,
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
+
+
+
+Container(
+  width: MediaQuery.of(context).size.width-180,
+  height: 250,
+  padding: EdgeInsets.all(4),
+  
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(5),
+    boxShadow: [
+      BoxShadow(
+        color: const Color.fromARGB(255, 218, 217, 217).withOpacity(0.5),
+        spreadRadius: 1,
+        blurRadius: 10,
+        offset: Offset(1, 2),
+      ),
+    ],
+  ),
+  child: Column(children: [
+     Expanded(
+              flex: 2,
+              child: Stack(
+                children: [
+                  
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width-150,
+                      height: 250,
+                      child: imageEnhanced(data['jetpack_featured_media_url'])),
+                  Positioned(
+                      top: 2,
+                      right: 2,
+                    child:  Obx(() => GestureDetector(  
+                    onTap: () => BookMark(data),
+                    child: isBookmarkedRx.value 
+                      ? CircleAvatar(
+                        maxRadius: 20,
+                        backgroundColor: Color(0xFFA4634E),
+                          child: Icon(Icons.bookmark_add_outlined, color: Colors.red,size: 25,)
+                      )
+                      :  CircleAvatar(
+                        maxRadius: 13,
+                          backgroundColor: Color(0xFFA4634E),
+                          child: Icon(Icons.bookmark_add_outlined, color: Colors.white,size: 20,),
                       ),
-                    )
-                  ],
-                ),
+                  ))),
+                ],
               ),
             ),
             SizedBox(
-              width: 10,
+              height: 10,
             ),
-            Expanded(
-              flex: 2,
-              child: SizedBox(
-                  width: 50,
-                  height: 110,
-                  child: imageEnhanced(data['jetpack_featured_media_url'])),
+            Text(
+              data['title']['rendered'],
+              overflow: TextOverflow.ellipsis,
+              style:
+                  TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              maxLines: 2,
             ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+            SizedBox(
+              height: 10,
+            ),
+
+
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.watch_later_outlined,
-                  color: Colors.grey[600],
+                Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      size: 15,
+                      color: Color(0xFFA4634E),
+                    ),
+                    SizedBox(width: 5,),
+                    Text(
+                      'Admin',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFFA4634E)),
+                    )
+                  ],
                 ),
-                Text(
-                  DateFormatter.getRelativeTime(data['date']),
-                  style: TextStyle(color: Colors.grey[700]),
-                )
+
+                Row(
+                  children: [
+                  
+                    SizedBox(width: 5,),
+                    Text(
+
+                      DateFormatter.getRelativeTime(data['date']),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFFA4634E)),
+                    )
+                  ],
+                ),
+
+               Icon(
+                      Icons.more_vert,
+                      size: 15,
+                      color: Colors.black,
+                    ),  
+       
               ],
-            ),
-    Obx(() => GestureDetector(
-    onTap: () => BookMark(data),
-    child: isBookmarkedRx.value 
-      ? Icon(Icons.bookmark, color: Colors.red)
-      : Icon(Icons.bookmark_border),
-  ))
-            
-          ],
-        )
-      ],
-    ),
+            )
+
+  ],),
   )
   ],
 );
