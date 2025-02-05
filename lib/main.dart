@@ -26,10 +26,10 @@ await AdMobHelper.initialization();
    Get.put(AdManager()); 
     await Firebase.initializeApp(
         options: const FirebaseOptions(
-      apiKey: 'AIzaSyChoouoKwe9rNrcqnQLmi7CY_-XwtiF7fk', // Get from google-services.json
-      appId: '1:607485914650:android:e128ecbf39191c62d2eba3', // Get from google-services.json
-      messagingSenderId: '607485914650', // Get from google-services.json
-      projectId: 'earnify-bole-f1c09', // Get from google-services.json
+      apiKey: 'AIzaSyBvfy4XYiJcbATSJ8ggs_4tRykn0va-2ec', // Get from google-services.json
+      appId: '1:337436476517:android:2f99b1076348de4a65b28c', // Get from google-services.json
+      messagingSenderId: '337436476517', // Get from google-services.json
+      projectId: 'earnify-bole-f0861', // Get from google-services.json
     ),
   );
   await GetStorage.init();

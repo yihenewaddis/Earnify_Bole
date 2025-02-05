@@ -1,15 +1,8 @@
 import 'package:earnify_bole/Controlers/AiController.dart';
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
-import 'package:earnify_bole/Controlers/BookMarkedController.dart';
-import 'package:earnify_bole/Controlers/DetailController.dart';
-import 'package:earnify_bole/Controlers/PopularController.dart';
-import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
-import 'package:earnify_bole/Screens/Home_Screen/Trending.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
 import 'package:earnify_bole/Widgets/GridCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
-import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
-import 'package:earnify_bole/Widgets/SmallCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -41,7 +34,8 @@ class DateFormatter {
 }
 
 class AI extends StatelessWidget {
-  const AI({super.key});
+  final Id;
+  const AI({super.key, required this.Id});
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +46,21 @@ class AI extends StatelessWidget {
     final AllPostController = Get.find<AllController>();
     void _onRefresh() async {
       controller.AiData.value = [];
-      await controller.fetchAiData(1, 12);
-// await Popularcontroller.fetchPopularData(1, 16);
+      await controller.fetchAiData(1);
+
       _refreshController.refreshCompleted();
     }
 
     void _onLoading() async {
-      await controller.fetchMoreAiData(controller.PageForMorData.value, 12);
+      await controller.fetchMoreAiData(controller.PageForMorData.value);
 
       _refreshController.loadComplete();
     }
-
+ 
+  Future.microtask(() {
+    controller.AiData.value = [];
+    controller.ChangeEndPoint(Id);
+  });
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SmartRefresher(
@@ -81,13 +79,13 @@ class AI extends StatelessWidget {
                     children: [
       
                       SizedBox(
-    height: 15,
+    height: 5,
                       ),
 
                       
-                      Obx(
+                Obx(
                         () => (controller.AiData.isEmpty)
-                            ?                 Column(
+                            ? Column(
                   children: [
                     shimmerEffect_2(context),
                     SizedBox(height: 10,),
@@ -95,9 +93,7 @@ class AI extends StatelessWidget {
                     SizedBox(height: 10,),
                     shimmerEffect_2(context),
                   ],
-                ):  Obx(
-                        () => (controller.AiData.isEmpty)
-                            ? shimmerEffect_2(context)
+                )
                             : AllPostController.IsGrid.value? GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -125,8 +121,6 @@ class AI extends StatelessWidget {
                               ),
                       ),
                 
-      
-                      ),
                       const SizedBox(
                         height: 20,
                       ),

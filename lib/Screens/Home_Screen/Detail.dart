@@ -5,6 +5,7 @@ import 'package:earnify_bole/Controlers/CommentController.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Comment.dart';
+import 'package:earnify_bole/Widgets/BigCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:earnify_bole/Widgets/SmallCard.dart';
 import 'package:flutter/cupertino.dart';
@@ -148,7 +149,7 @@ margin: const EdgeInsets.only(top: 300),
                                 children: [
                                   Icon(
                                     Icons.account_circle_rounded,
-                                    color: Colors.grey[400],
+                                    color: Color(0xFF101B2D),
                                     size: 50,
                                   ),
                                   Column(
@@ -159,13 +160,14 @@ margin: const EdgeInsets.only(top: 300),
                                       Text(
                                         'Admin',
                                         style: TextStyle(
+                                          color: Color(0xFF101B2D),
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Obx(() => Text(
                                             DateFormatter.getRelativeTime(
                                                 controller.data['date']),
                                             style: TextStyle(
-                                                color: Colors.grey[500]),
+                                                color: Color(0xFF101B2D)),
                                           ))
                                     ],
                                   )
@@ -179,7 +181,7 @@ onTap: () =>{
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: Color(0xFF101B2D),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: const Row(
                                     crossAxisAlignment:
@@ -235,7 +237,7 @@ fontWeight: FontWeight.bold,
                               width: 5,
                               height: 25,
                               decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  color: Color(0xFF101B2D),
                                   borderRadius: BorderRadius.circular(10)),
                             ),
                             const SizedBox(
@@ -244,6 +246,7 @@ fontWeight: FontWeight.bold,
                             const Text(
                           'Related Articles',
                               style: TextStyle(
+                                color: Color(0xFF101B2D),
                                   fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                           ],
@@ -275,7 +278,7 @@ fontWeight: FontWeight.bold,
                                         curve: Curves.easeInOut,
                                       );
                                     },
-                                    child: SmallCard(context,
+                                    child: BigCard(context,
                                     controller.Relateddata[index],index,'Popular'),
                                   )),
                         ),
@@ -290,7 +293,7 @@ SizedBox(height: 50,),
                               width: 5,
                               height: 25,
                               decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  color: Color(0xFF101B2D),
                                   borderRadius: BorderRadius.circular(10)),
                             ),
                             const SizedBox(
@@ -299,12 +302,13 @@ SizedBox(height: 50,),
                             const Text(
                               'Articles you may Love',
                               style: TextStyle(
+                                color: Color(0xFF101B2D),
                                   fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 5,
                         ),
                         Column(
                           children: List.generate(
@@ -333,7 +337,7 @@ SizedBox(height: 50,),
                                         curve: Curves.easeInOut,
                                       );
                                     },
-                                    child: SmallCard(context,
+                                    child: BigCard(context,
                                     Popularcontroller.PopularData[index],index,'Popular'),
                                   )),
                         ),
@@ -367,13 +371,13 @@ ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toD
                   child: Container(
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Color(0xFF101B2D),
                           borderRadius: BorderRadius.circular(20)),
                       child: const Icon(
                         Icons.arrow_back_ios_new,
                         size: 25,
                         weight: 100,
-                        color: Colors.black,
+                        color: Colors.white,
                       )),
                 ),
                 Row(
@@ -384,10 +388,10 @@ Obx(() => GestureDetector(
       ? Container(
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color(0xFF101B2D),
                               borderRadius: BorderRadius.circular(20)),
                           child: const Icon(
-Icons.bookmark,
+Icons.bookmark_add_outlined,
                             size: 25,
                             weight: 100,
                         color: Colors.red,
@@ -395,13 +399,13 @@ Icons.bookmark,
       : Container(
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Color(0xFF101B2D),
                               borderRadius: BorderRadius.circular(20)),
                           child: const Icon(
-Icons.bookmark_border,
+Icons.bookmark_add_outlined,
                             size: 25,
                             weight: 100,
-                            color: Colors.black,
+                            color: Colors.white,
                           )),
   )),
                     SizedBox(
@@ -414,13 +418,13 @@ Icons.bookmark_border,
                       child: Container(
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Color(0xFF101B2D),
                               borderRadius: BorderRadius.circular(20)),
                           child: const Icon(
                             Icons.share,
                             size: 25,
                             weight: 100,
-                            color: Colors.black,
+                            color: Colors.white,
                           )),
                     )
                   ],

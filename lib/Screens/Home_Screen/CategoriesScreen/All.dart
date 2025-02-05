@@ -56,8 +56,9 @@ class All extends StatelessWidget {
     final AllPostController = Get.find<AllController>();
     void _onRefresh() async {
       AllPostController.AllData.value = [];
-      await AllPostController.fetchAllData(1, 0);
-// await Popularcontroller.fetchPopularData(1, 16);
+      Popularcontroller.PopularData.value = [];
+       AllPostController.fetchAllData(1, 0);
+await Popularcontroller.fetchPopularData(1, 10);
       _refreshController.refreshCompleted();
     }
 
@@ -121,9 +122,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                 },
                                 child: Stack(
                                   children: [
-                                    imageEnhanced(
-                                        AllPostController.AllData[index]
-                                            ["jetpack_featured_media_url"]),
+                                    imageEnhanced(AllPostController.AllData[index]['jetpack_featured_media_url']),
                                     Positioned(
                                         bottom: 0,
                                         right: 0,
@@ -165,12 +164,12 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                               Container(
                                                 padding: EdgeInsets.all(10),
                                                 decoration: BoxDecoration(
-                                                  color: Color(0xFFA4634E),
+                                                  color: Color(0xFF101B2D),
                                                   borderRadius:
                                                       BorderRadius.circular(20),
 
                                                 ),
-                                                child:  Text('Red More',style: TextStyle(
+                                                child:  Text('Read More',style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold
                                                 ),),
@@ -210,7 +209,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                   shape: BoxShape.rectangle,
                                   color:
                                       (AllPostController.CurrentPageIndex == i)
-                                          ? Color(0xFFA4634E)
+                                          ? Color(0xFF101B2D)
                                           : Colors.grey[500],
                                   borderRadius: BorderRadius.circular(20)),
                             )),
@@ -222,6 +221,11 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
               SizedBox(
                 height: 20,
               ),
+
+
+
+
+
 
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -236,7 +240,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                 width: 5,
                                 height: 25,
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFA4634E),
+                                    color: Color(0xFF101B2D),
                                     borderRadius: BorderRadius.circular(10)),
                               ),
                               const SizedBox(
@@ -245,7 +249,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                               const Text(
                                 'Popular News',
                                 style: TextStyle(
-                                  color: Color(0xFFA4634E),
+                                  color: Color(0xFF101B2D),
                                     fontSize: 20, fontWeight: FontWeight.w700),
                               )
                             ],
@@ -258,48 +262,30 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                 TrendingScreen()),
                             child: Icon(
                               Icons.arrow_forward_rounded,
-                              color: Color(0xFFA4634E),
-                              size: 30,
+                              color: Colors.black,
+                              size: 25,
                             ),
                           )
                         ],
                       ),
                       SizedBox(height: 5,),
-                   SizedBox(
-                        height: 10,
-                      ),
+                 
+
+
+
+                      
                       Obx(
                         () => (Popularcontroller.PopularData.isEmpty)
-                            ? Column(
-                                children: [
-                                  shimmerEffect_2(context),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  shimmerEffect_2(context),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  shimmerEffect_2(context)
-                                ],
-                              )
+                            ? SizedBox(
+                              height: 200,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder:(context, index){return shimmerEffect_2(context);} , itemCount: 5),
+                            )
             :   SizedBox(
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
+ 
               height: 260, 
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -355,7 +341,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                             width: 5,
                             height: 25,
                             decoration: BoxDecoration(
-                                color: Colors.black,
+                                color: Color(0xFF101B2D),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                           const SizedBox(
@@ -364,6 +350,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                           const Text(
                             'Latest News',
                             style: TextStyle(
+                              color: Color(0xFF101B2D),
                                 fontSize: 20, fontWeight: FontWeight.w700),
                           )
                             ],
@@ -375,7 +362,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                   ? Icons.grid_view
                                   : Icons.line_style_rounded,
                               color: Colors.black,
-                              size: 30,
+                              size: 25,
                             )),
                           )
                         ],
@@ -396,7 +383,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                             itemCount: AllPostController.AllData.length,
                             itemBuilder: (context, index) {
                               return GridCard(
-                                context,
+                                context,  
                                 AllPostController.AllData[index],
                                 index,
                                 'All',

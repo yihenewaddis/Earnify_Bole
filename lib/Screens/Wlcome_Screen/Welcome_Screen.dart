@@ -24,7 +24,7 @@ storageData.write('Booked', []);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFF101B2D),
     body:Stack(
       
       children: [
@@ -40,7 +40,7 @@ storageData.write('Booked', []);
           children: [
 
             Container(
-              color: Colors.white,
+              color: Color(0xFF101B2D),
               child: Column(
                 children: [
                    const Expanded(
@@ -63,7 +63,7 @@ storageData.write('Booked', []);
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text("Welcome to BoleNav",style: TextStyle(
-                            color: Color.fromARGB(255, 1, 72, 3),
+                            color: Colors.white,
                             fontSize: 25,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500
@@ -75,7 +75,7 @@ storageData.write('Booked', []);
                          const Padding(
                             padding:  EdgeInsets.all(1),
                             child: Text('Start earning online today',style: TextStyle(
-                                  color: Color.fromARGB(255, 1, 72, 3),
+                                  color: Colors.white,
                             fontSize: 22,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500
@@ -115,7 +115,7 @@ _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.eas
 
 
             Container(
-              color: Colors.white,
+              color: Color(0xFF101B2D),
               child: Column(
                 children: [
                    const Expanded(
@@ -145,7 +145,7 @@ _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.eas
                          const Padding(
                             padding:  EdgeInsets.symmetric(horizontal: 20),
                             child: Text('Discover simple trust ways to earn money.',style: TextStyle(
-                                  color: Color.fromARGB(255, 1, 72, 3),
+                                  color: Colors.white,
                             fontSize: 22,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500
@@ -170,6 +170,7 @@ _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.eas
                                 color: Colors.white,
                                 fontFamily: 'inter',
                                 fontSize: 16,
+
                                 fontWeight: FontWeight.bold
                               ),
                             ),
@@ -185,7 +186,7 @@ _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.eas
 
 
            Container(
-              color: Colors.white,
+              color: Color(0xFF101B2D),
               child: Column(
                 children: [
                    const Expanded(
@@ -215,7 +216,7 @@ _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.eas
                          const Padding(
                             padding:  EdgeInsets.symmetric(horizontal: 20),
                             child: Text("Let's navigate your journey to financial success",style: TextStyle(
-                                 color: Color.fromARGB(255, 1, 72, 3),
+                                 color: Colors.white,
                             fontSize: 22,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500
@@ -276,15 +277,16 @@ Get.offNamed('/initialScreen');
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal:10,vertical: 5),
                     decoration: BoxDecoration(
-                      color: Colors.grey[100],
+                      color: Colors.black,
                       borderRadius: BorderRadius.circular(20)
                     ),
                     child:const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.keyboard_double_arrow_left_rounded),
+                        Icon(Icons.keyboard_double_arrow_left_rounded,color: Colors.white,),
                         Text('Back',style: TextStyle(
+                          color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'inter'
                 ),)
@@ -304,6 +306,7 @@ Get.offNamed('/initialScreen');
                       _controler.nextPage(duration:const Duration(milliseconds: 300), curve:Curves.easeIn); }
                     },
                     child:const Text('Skip',style: TextStyle(
+                      color: Colors.white,
                       fontWeight: FontWeight.bold
                     ),))
             ],

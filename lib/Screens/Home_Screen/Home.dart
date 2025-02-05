@@ -1,18 +1,8 @@
-import 'package:earnify_bole/AdMobHelper.dart';
+
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
-import 'package:earnify_bole/Controlers/NotificationController.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Ai.dart';
+import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Category.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/All.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/AndroidApps.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/AndroidTips.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/BestWebsite.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Crypto.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Earnify.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/EarningApps.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Forex.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Sport.dart';
-import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Tech.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final catagoryController = Get.put(CategoryController());
-final NotificationController _NotificationController = Get.put(NotificationController());
+
   final AllPostController = Get.put(AllController());
 Future<void> onLounchUrl(String url) async{
 final Uri Singleurl = Uri.parse(url);
@@ -34,27 +24,31 @@ if(!await launchUrl(Singleurl)){
 }
 }
 
-    return DefaultTabController(
-length:11, 
+    return  Obx(() => catagoryController.CategoryList.isEmpty?Center(
+      child: Image(image: AssetImage('assets/gif.gif')),
+    ): DefaultTabController(
+length:catagoryController.CategoryList.length+1, 
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.grey[100],
-         drawer: Drawer(
+        drawer: Drawer(
         backgroundColor: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             Container(
               height: 230,
-              color:  Color(0xFFA4634E),
-              child: const Column(
+              color:  Color(0xFF101B2D),
+              child:  Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage('assets/logo.png'),width: 40,height: 40,),
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(10), 
+                          child: Image(image: AssetImage('assets/logo.png'),width: 40,height: 40,)),
                         Text(' EARNIFY BOLE',style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
@@ -73,48 +67,48 @@ length:11,
             ),
             const SizedBox(height: 10,),
             ListTile(
-              textColor: Color(0xFFA4634E),
-              iconColor: Color(0xFFA4634E),
+              textColor: Color(0xFF101B2D),
+              iconColor: Color(0xFF101B2D),
               leading:const Icon(Icons.person_2_outlined),
               title:const Text('About us'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/about-us/'),
+              onTap: ()=>onLounchUrl('https://earnify.bolefx.com/about-us/'),
             ),
             ListTile(
-              textColor: Color(0xFFA4634E),
-              iconColor: Color(0xFFA4634E),
+              textColor: Color(0xFF101B2D),
+              iconColor: Color(0xFF101B2D),
               leading:const Icon(Icons.link),
               title:const Text('Website'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com'),
+              onTap: ()=>onLounchUrl('https://earnify.bolefx.com/'),
             ),
             ListTile(
-              textColor: Color(0xFFA4634E),
-              iconColor: Color(0xFFA4634E),
+              textColor: Color(0xFF101B2D),
+              iconColor: Color(0xFF101B2D),
               leading:const Icon(Icons.facebook),
               title:const Text('FaceBook'),
-              onTap: ()=>onLounchUrl('https://facebook.com/bolenav/'),
+              onTap: ()=>onLounchUrl('https://facebook.com/bolefx'),
             ),
             ListTile(
-              textColor: Color(0xFFA4634E),
-              iconColor: Color(0xFFA4634E),
+              textColor: Color(0xFF101B2D),
+              iconColor: Color(0xFF101B2D),
               leading:const Icon(Icons.email_outlined),
               title:const Text('Contact us'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/contact-us/'),
+              onTap: ()=>onLounchUrl('https://earnify.bolefx.com/contact/'),
             ),
             
             ListTile(
-              textColor: Color(0xFFA4634E),
-              iconColor: Color(0xFFA4634E),
+              textColor: Color(0xFF101B2D),
+              iconColor: Color(0xFF101B2D),
               leading:const Icon(Icons.contrast_outlined),
-              title:const Text('Term and condition'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/terms-and-conditions/'),
+              title:const Text('Terms and conditions'),
+              onTap: ()=>onLounchUrl('https://earnify.bolefx.com/terms/'),
             ),
             
             ListTile(
-              textColor: Color(0xFFA4634E),
-              iconColor: Color(0xFFA4634E),
+              textColor: Color(0xFF101B2D),
+              iconColor: Color(0xFF101B2D),
               leading:const Icon(Icons.perm_device_info),
               title:const Text('Disclaimer'),
-              onTap: ()=>onLounchUrl('https://blog.bolenav.com/disclaimer/'),
+              onTap: ()=>onLounchUrl('https://earnify.bolefx.com/disclaimer/'),
             ),
           ],
         ),
@@ -126,17 +120,21 @@ length:11,
               pinned: true,
               floating: true,
               snap: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF101B2D),
         surfaceTintColor: Colors.white,
         title:Container(
           padding: EdgeInsets.zero,
           margin: EdgeInsets.zero,
-          child: const Row(
+          child:  Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // Image(image: AssetImage('assets/logo.png'),width: 25,height: 25,),
+              ClipRRect(
+                            borderRadius: BorderRadius.circular(5), 
+                          child: Image(image: AssetImage('assets/logo.png'),width: 25,height: 25,)),
+                          SizedBox(width: 10,),
               Text("Earnify Bole",style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 15,
               fontWeight: FontWeight.bold
               ))
@@ -148,7 +146,7 @@ length:11,
               scaffoldKey.currentState?.openDrawer(); // Open the drawer
             },
           child: Container(
-            child:const Icon(Icons.menu,size: 30,color: Colors.black,),
+            child:const Icon(Icons.menu,size: 30,color: Colors.white,),
           ),
         ),
         actions: [
@@ -159,7 +157,7 @@ length:11,
               duration:const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
               const SearchScreen()),
-            child:const Icon(Icons.search,size: 30,weight: 10,color: Colors.black,)),
+            child:const Icon(Icons.search,size: 30,weight: 10,color: Colors.white,)),
           const SizedBox(width: 15,),
           GestureDetector(
                             onTap: () => AllPostController.ChangeLayout(),
@@ -167,7 +165,7 @@ length:11,
                               (AllPostController.IsGrid.value)
                                   ? Icons.grid_view
                                   : Icons.line_style_rounded,
-                              color: Colors.black,
+                              color: Colors.white,
                               size: 30,
                             )),
                           ),
@@ -177,55 +175,57 @@ length:11,
         ],
 
     bottom:  TabBar(
+      indicatorWeight: 4, 
               tabAlignment: TabAlignment.center,        
-              labelColor: Color(0xFFA4634E),
+              labelColor: Colors.white,
+              
               labelStyle:const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w800
+                fontWeight: FontWeight.w800,
               ),
               unselectedLabelStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-              color:Colors.grey[800]
+              color:Colors.grey[500]
               ),
               isScrollable: true,
               padding: EdgeInsets.all(0),
-              indicatorColor: Color(0xFFA4634E),
+              indicatorColor: Color(0xFF101B2D),
               indicatorPadding: EdgeInsets.zero, 
-              tabs:const [
+              tabs: [
               Tab(
                 text: '  All  ',
               ),
-              Tab(
-                text: '  AI  ',
-              ),
-              Tab(
-                text: 'Android Apps',
-              ),
-              Tab(
-                text: 'Android tips',
-              ),
-              Tab(
-                text: 'Best Website',
-              ),
-              Tab(
-                text: 'Crypto',
-              ),
-              Tab(
-                text: 'Earnify',
-              ),
-              Tab(
-                text: 'Earning apps',
-              ),
-              Tab(
-                text: 'Forex',
-              ),
-              Tab(
-                text: 'Sport',
-              ),
-              Tab(
-                text: 'Tech',
-              ),
+              for (int i = 0; i < catagoryController.CategoryList.length; i++)   Tab(
+                  text: catagoryController.CategoryList[i]['name'],
+                ),
+              // Tab(
+              //   text: 'Android Apps',
+              // ),
+              // Tab(
+              //   text: 'Android tips',
+              // ),
+              // Tab(
+              //   text: 'Best Website',
+              // ),
+              // Tab(
+              //   text: 'Crypto',
+              // ),
+              // Tab(
+              //   text: 'Earnify',
+              // ),
+              // Tab(
+              //   text: 'Earning apps',
+              // ),
+              // Tab(
+              //   text: 'Forex',
+              // ),
+              // Tab(
+              //   text: 'Sport',
+              // ),
+              // Tab(
+              //   text: 'Tech',
+              // ),
             
             ]),
               
@@ -234,18 +234,19 @@ length:11,
           
           body:Stack(
             children: [
-              const TabBarView(children: [
-              All(),
-              AI(),
-              AndroidApps(),
-              AndroidTips(),
-              BestWebsite(),
-              Crypto(),
-              Earnify(),
-              EarningApps(),
-              Forex(),
-              Sport(),
-              Tech()
+              TabBarView(children: [
+                All(),
+              // All(),
+              for (int i = 0; i < catagoryController.CategoryList.length; i++) AI(Id: catagoryController.CategoryList[i]['id']),
+              // AndroidApps(),
+              // AndroidTips(),
+              // BestWebsite(),
+              // Crypto(),
+              // Earnify(),
+              // EarningApps(),
+              // Forex(),
+              // Sport(),
+              // // Tech()
                       ]),
  
             ],
@@ -256,7 +257,7 @@ length:11,
 
      
 
-      ));
+      )));
       
   }
 }

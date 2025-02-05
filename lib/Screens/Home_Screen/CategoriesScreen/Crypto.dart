@@ -1,7 +1,9 @@
 
+import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/CryptoController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
+import 'package:earnify_bole/Widgets/GridCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,16 +17,16 @@ class Crypto extends StatelessWidget {
 
       RefreshController _refreshController = RefreshController(initialRefresh: false);
       final controller = Get.put(CryptoController());
-        
+      final AllPostController = Get.find<AllController>();
   void _onRefresh() async{
   controller.CryptoData.value = [];
-  await controller.fetchCryptoData(1, 2);
+  await controller.fetchCryptoData(1, 6);
     _refreshController.refreshCompleted();
   }
 
 
   void _onLoading() async{
-await controller.fetchMoreCryptoData(controller.PageForMorData.value,2);
+await controller.fetchMoreCryptoData(controller.PageForMorData.value,6);
     _refreshController.loadComplete();
   }
 
@@ -46,60 +48,59 @@ await controller.fetchMoreCryptoData(controller.PageForMorData.value,2);
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-                  //     Row(     
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Row(
-                  //         children: [
-                  //         Container(
-                  //             width: 5, 
-                  //             height: 25,
-                  //             decoration: BoxDecoration(
-                                
-                  //               color: Colors.black, 
-                  //               borderRadius: BorderRadius.circular(10)
-                  //             ),
-                  //           ),
-                  //           const SizedBox(width: 5,),
-                  //   const Text('Crypto',style: TextStyle(
-                  //             fontSize: 20,
-                  //             fontWeight: FontWeight.w700
-                  //           ),)
-                  //         ],
-                  //       ),
-                  //       GestureDetector(
-                  // child: Icon(Icons.monetization_on_outlined,color:Color.fromARGB(255, 242, 179, 7)),
-                  //       )
-                  //     ],
-                  //   ),
+              
         
                     
-                    const SizedBox(height: 15,),
-                    
-    Obx(() => (controller.CryptoData.isEmpty)?
-                Column(
-                  children: [
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                  ],
-                ):
+                    const SizedBox(height: 5,),
+           
+                      Obx(
+                        () => (controller.CryptoData.isEmpty)
+                            ? Column(
+                                children: [
+                                  shimmerEffect_2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  shimmerEffect_2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  shimmerEffect_2(context),
+                                ],
+                              )
+                            : AllPostController.IsGrid.value
+                                ? GridView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      childAspectRatio: 0.8,
+                                    ),
+                                    itemCount:
+                                        controller.CryptoData.length,
+                                    itemBuilder: (context, index) {
+                                      return GridCard(
+                                        context,
+                                        controller.CryptoData[index],
+                                        index,
+                                        'Crypto',
+                                      );
+                                    },
+                                  )
+                                : Column(
+                                    children: List.generate(
+                                      controller.CryptoData.length,
+                                      (index) => BigCard(
+                                          context,
+                                          controller.CryptoData[index],
+                                          index,
+                                          'Crypto'),
+                                    ),
+                                  ),
+                      ),          
 
-                Column(
-                      children: List.generate(
-        controller.CryptoData.length,
-(index) => GestureDetector(
-
-onTap: ()=>Get.to(DetailScreen()),
-
-  child: BigCard(context,controller.CryptoData[index],index,'Crypto'),
-)
-                      ),
-                    ),
-                        
-                    ),
                     
                     const SizedBox(height: 20,),
                     ],

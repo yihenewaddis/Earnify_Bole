@@ -15,7 +15,7 @@ final CategoryList  = <dynamic>[].obs;
   @override
   void onInit(){
     super.onInit();
-fetchCategoryData(0,0);
+fetchCategoryData();
   }
   
 
@@ -23,13 +23,15 @@ fetchCategoryData(0,0);
 
 
 
-Future<void> fetchCategoryData(int Page , int endpoint) async {
+Future<void> fetchCategoryData() async {
     try {
       startLoading();
 final result = await _apiService.getApiData(0,0);
-print('Catagory');
-CategoryList.addAll(result);
-print(result);
+
+CategoryList.value = result;
+ print('--------------------------------');
+      print(CategoryList);
+      print('--------------------------------');
     } catch (e) {
       handleError(e.toString());
     } finally {

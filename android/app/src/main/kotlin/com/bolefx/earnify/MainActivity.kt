@@ -1,4 +1,4 @@
-package com.bolenav.blog
+package com.bolefx.earnify
 
 import io.flutter.embedding.android.FlutterActivity
 

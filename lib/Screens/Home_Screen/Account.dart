@@ -23,13 +23,14 @@ if(!await launchUrl(Singleurl)){
 }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF101B2D),
    
         title: Text('Settings',style: TextStyle(
-          color: Colors.white
+          color: Colors.white,
+          fontWeight: FontWeight.w900
         ),),
       ),
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body:SingleChildScrollView(
         child: Column(
           children: [
@@ -44,26 +45,26 @@ if(!await launchUrl(Singleurl)){
                   Text('About App',style: TextStyle(
                     fontFamily: 'inter',
                     fontSize: 20,
-                    color: Colors.grey[900],
+                    color: Color(0xFFA4634E),
                     fontWeight: FontWeight.bold
                   ),),
                   SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: ()=>onLounchUrl('https://blog.bolenav.com/privacy-policy/'),
+                    onTap: ()=>onLounchUrl('https://earnify.bolefx.com/privacy-policy-2/'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
-                             Container(
+                            Container(
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 11, 138, 242),
                                 borderRadius: BorderRadius.circular(50)
                               ),
                               child: Icon(Icons.lock_rounded,color: Colors.white,),
-                             ),
-                             SizedBox(width: 10,),
+                            ),
+                        SizedBox(width: 10,),
                         Text('Privacy Policy',style: TextStyle(
                           fontFamily: 'inter',
                           fontSize: 17,
@@ -76,7 +77,7 @@ if(!await launchUrl(Singleurl)){
                   ),
                    SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: ()=>onLounchUrl('https://play.google.com/'),
+                    onTap: ()=>onLounchUrl('https://play.google.com/store/apps/details?id=earnify.bolefx.com'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -115,12 +116,12 @@ if(!await launchUrl(Singleurl)){
                   Text('Social Setting',style: TextStyle(
                     fontFamily: 'inter',
                     fontSize: 20,
-                    color: Colors.grey[900],
+                    color: Color(0xFFA4634E),
                     fontWeight: FontWeight.bold
                   ),),
                   SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: ()=>onLounchUrl('https://blog.bolenav.com/contact-us/'),
+                    onTap: ()=>onLounchUrl('https://earnify.bolefx.com/contact/'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -147,7 +148,7 @@ if(!await launchUrl(Singleurl)){
                   ),
                    SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: ()=>onLounchUrl('https://blog.bolenav.com'),
+                    onTap: ()=>onLounchUrl('https://earnify.bolefx.com/'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -175,7 +176,7 @@ if(!await launchUrl(Singleurl)){
 
                   SizedBox(height: 20,),
                   GestureDetector(
-                    onTap: ()=>onLounchUrl('https://facebook.com/bolenav/'),
+                    onTap: ()=>onLounchUrl('https://facebook.com/bolefx'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

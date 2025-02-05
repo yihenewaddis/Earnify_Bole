@@ -82,6 +82,31 @@ isBookmarkedRx.value = isBookmarked();
 
 return Column(
   children: [
+    (index % 3 == 0 && index !=0)?
+
+      SizedBox(
+
+      width: MediaQuery.of(context).size.width,
+height: 200,
+        child: Stack(
+          children: [
+            SizedBox(height: 10,),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Center(
+                child: Text('AD'),
+              ),
+            ),
+            AdWidget(
+            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width-10,height: 200)..load(),
+              key: UniqueKey(),
+            ),
+          ],
+        ),
+      ):
     Container(
       padding: EdgeInsets.all(5),
       width: MediaQuery.of(context).size.width,
@@ -91,9 +116,9 @@ height: 200,
         borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 218, 217, 217).withOpacity(0.5),
+            color: const Color(0xFF101B2D).withOpacity(0.1),
             spreadRadius: 1,
-            blurRadius: 2,
+            blurRadius: 0.5,
             offset: Offset(1, 1),
           ),
         ],
@@ -172,7 +197,9 @@ DetailControllers.Relateddata.value = techController.TechData;
               child: SizedBox(
                   width: double.infinity,
                   height: 250,
-                  child: imageEnhanced(data['jetpack_featured_media_url'])),
+                  child: imageEnhanced(data['jetpack_featured_media_url'])
+                  
+                  ),
             ),
             SizedBox(
               width: 5,
@@ -197,14 +224,14 @@ DetailControllers.Relateddata.value = techController.TechData;
               Row(
                     
                     children: [
-                  Icon(Icons.person, size: 15, color: Color(0xFFA4634E)),
+                  Icon(Icons.person, size: 15, color: Color(0xFF101B2D)),
                   SizedBox(width: 5,),
                       Text(
                         'Admin',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFA4634E)),
+                          color: Color(0xFF101B2D)),
                       )
                     ],
                   ),
@@ -219,7 +246,7 @@ DetailControllers.Relateddata.value = techController.TechData;
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFA4634E)),
+                          color: Color(0xFF101B2D)),
                       )
                     ],
                   ),
@@ -228,12 +255,12 @@ DetailControllers.Relateddata.value = techController.TechData;
                 child: isBookmarkedRx.value 
                   ? CircleAvatar(
                     maxRadius: 13,
-                    backgroundColor: Color(0xFFA4634E),
+                    backgroundColor: Color(0xFF101B2D),
                     child: Icon(Icons.bookmark_add_outlined, color: Colors.red,size: 15,),
                   )
                   : CircleAvatar(
                     maxRadius: 13,
-                      backgroundColor: Color(0xFFA4634E),
+                      backgroundColor: Color(0xFF101B2D),
                       child: Icon(Icons.bookmark_add_outlined, color: Colors.white,size: 18,),
                   ),
               ))

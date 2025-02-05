@@ -7,7 +7,7 @@ class EarningAppController extends BaseController{
     RxInt Page = 1.obs;
     RxInt PageForMorData =1.obs;
   
-RxInt endpoint = 10.obs;
+RxInt endpoint = 8.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
 final EarningAppData = <dynamic>[].obs;
   

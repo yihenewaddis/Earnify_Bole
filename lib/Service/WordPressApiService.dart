@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WordPressApiService extends GetxService {
-static const String baseUrl = 'https://blog.bolenav.com/wp-json/wp/v2';
+static const String baseUrl = 'https://earnify.bolefx.com/wp-json/wp/v2';
 
   // Generic GET request method
   Future<dynamic> get(String endpoint) async {
@@ -34,6 +34,7 @@ if(endpoint == 0 && page!=0){
 }else if(endpoint == 0 && page==0){
 return await get('categories');
 }
+
   else{
 return await get('posts?categories=$endpoint&page=$page');
 }

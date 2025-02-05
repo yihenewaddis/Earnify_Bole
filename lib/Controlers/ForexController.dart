@@ -7,7 +7,7 @@ class ForexController extends BaseController{
     RxInt Page = 1.obs;
     RxInt PageForMorData =1.obs;
   
-RxInt endpoint = 3.obs;
+RxInt endpoint = 9.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
 final ForexData = <dynamic>[].obs;
   

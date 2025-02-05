@@ -7,9 +7,9 @@ class PopularController extends BaseController{
     RxInt Page = 1.obs;
     RxInt PageForMorData =1.obs;
   
-RxInt endpoint = 16.obs;
+    RxInt endpoint = 10.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
-final PopularData = <dynamic>[].obs;
+    final PopularData = <dynamic>[].obs;
   
 
   @override
@@ -40,6 +40,7 @@ Future<void> fetchPopularData(int Page , int endpoint) async {
     try {
       startLoading();
 final result = await _apiService.getApiData(endpoint,Page);
+
    PopularData.value = result;
     } catch (e) {
       handleError(e.toString());

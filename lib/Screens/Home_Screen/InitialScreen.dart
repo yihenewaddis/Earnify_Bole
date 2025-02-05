@@ -1,19 +1,10 @@
-import 'dart:ffi';
-import 'dart:math';
-
-import 'package:earnify_bole/AdMobHelper.dart';
-import 'package:earnify_bole/Controlers/NotificationController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Account.dart';
 import 'package:earnify_bole/Screens/Home_Screen/BookMark.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Home.dart';
-import 'package:earnify_bole/Screens/Home_Screen/Notification.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Search.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Trending.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:get/get.dart';
 
 class InitialHomeScreen extends StatefulWidget {
   const InitialHomeScreen({super.key});
@@ -29,6 +20,7 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
   List Pages = [
     HomeScreen(),
     TrendingScreen(),
+    SearchScreen(),
     BookMarkScreen(),
     AccountScreen()
   ];
@@ -42,12 +34,11 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
  
       ],
 ),
-        bottomNavigationBar: Padding(
-          padding:
-              const EdgeInsets.only(left: 15, right: 15, bottom: 8, top: 5),
-          child:GNav(
-            color: Color(0xFFA4634E),
-            iconSize: 27,
+        bottomNavigationBar:GNav(
+            tabMargin: EdgeInsets.fromLTRB(7, 3, 7, 5),
+            backgroundColor: Colors.white,
+            color: Color(0xFF101B2D),
+            iconSize: 25,
             activeColor: Colors.white,
             selectedIndex: selectedIndex,
             onTabChange: (index) {
@@ -56,30 +47,37 @@ class _InitialHomeScreenState extends State<InitialHomeScreen> {
               });
             },
             duration: const Duration(milliseconds: 500),
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            gap: 8,
-            tabBackgroundColor: Color(0xFFA4634E),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+            tabBackgroundColor: Color(0xFF101B2D),
             tabs: const [
               GButton(
+                padding: EdgeInsets.all(10),
                 icon: Icons.home_rounded,
                 text: 'Home',
               ),
               GButton(
+                 padding: EdgeInsets.all(10),
                 icon: Icons.local_fire_department,
                 text: 'Trending',
-                iconActiveColor: Colors.red,
-                iconColor: Colors.red,
+              ),
+              
+              GButton(
+                 padding: EdgeInsets.all(10),
+                icon: Icons.search,
+                text: 'Search',
               ),
               GButton(
+                 padding: EdgeInsets.all(10),
                 icon: Icons.bookmark_outline,
                 text: 'Booked',
               ),
               GButton(
+                 padding: EdgeInsets.all(10),
                 icon: Icons.person_2_outlined,
                 text: 'Account',
               ),
             ],
 
-        )));
+        ));
   }
 }

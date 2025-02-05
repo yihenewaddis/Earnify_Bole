@@ -7,7 +7,7 @@ class SportController extends BaseController{
     RxInt Page = 1.obs;
     RxInt PageForMorData =1.obs;
   
-RxInt endpoint = 4.obs;
+RxInt endpoint = 11.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
 final SportData = <dynamic>[].obs;
   

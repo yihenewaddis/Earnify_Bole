@@ -99,18 +99,18 @@ Container(
   width: MediaQuery.of(context).size.width-180,
   height: 250,
   padding: EdgeInsets.all(4),
-  
+  margin: EdgeInsets.only(right: 5),
   decoration: BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(5),
     boxShadow: [
-      BoxShadow(
-        color: const Color.fromARGB(255, 218, 217, 217).withOpacity(0.5),
-        spreadRadius: 1,
-        blurRadius: 10,
-        offset: Offset(1, 2),
-      ),
-    ],
+          BoxShadow(
+            color: const Color(0xFF101B2D).withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(1, 1),
+          ),
+        ],
   ),
   child: Column(children: [
      Expanded(
@@ -121,7 +121,9 @@ Container(
                   SizedBox(
                       width: MediaQuery.of(context).size.width-150,
                       height: 250,
-                      child: imageEnhanced(data['jetpack_featured_media_url'])),
+                      child: imageEnhanced(data['jetpack_featured_media_url'])
+                      
+                      ),
                   Positioned(
                       top: 2,
                       right: 2,
@@ -130,12 +132,12 @@ Container(
                     child: isBookmarkedRx.value 
                       ? CircleAvatar(
                         maxRadius: 20,
-                        backgroundColor: Color(0xFFA4634E),
+                        backgroundColor: Color(0xFF101B2D),
                           child: Icon(Icons.bookmark_add_outlined, color: Colors.red,size: 25,)
                       )
                       :  CircleAvatar(
                         maxRadius: 13,
-                          backgroundColor: Color(0xFFA4634E),
+                          backgroundColor: Color(0xFF101B2D),
                           child: Icon(Icons.bookmark_add_outlined, color: Colors.white,size: 20,),
                       ),
                   ))),
@@ -165,14 +167,14 @@ Container(
                     Icon(
                       Icons.person,
                       size: 15,
-                      color: Color(0xFFA4634E),
+                      color: Color(0xFF101B2D),
                     ),
                     SizedBox(width: 5,),
                     Text(
                       'Admin',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Color(0xFFA4634E)),
+                        color: Color(0xFF101B2D)),
                     )
                   ],
                 ),
@@ -186,7 +188,7 @@ Container(
                       DateFormatter.getRelativeTime(data['date']),
                       style: TextStyle(
                         fontSize: 12,
-                        color: Color(0xFFA4634E)),
+                        color: Color(0xFF101B2D)),
                     )
                   ],
                 ),

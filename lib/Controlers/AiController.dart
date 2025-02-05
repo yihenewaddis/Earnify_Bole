@@ -8,7 +8,7 @@ class AiController extends BaseController{
     RxInt Page = 1.obs;
 RxInt PageForMorData =1.obs;
     // 12 means Ai id
-    RxInt endpoint = 12.obs;
+    RxInt endpoint = 2.obs;
     final WordPressApiService _apiService = Get.find<WordPressApiService>();
     final AiData = <dynamic>[].obs;
     void changeCurrentIndex(int index){
@@ -18,16 +18,20 @@ RxInt PageForMorData =1.obs;
   @override
   void onInit(){
     super.onInit();
-    fetchAiData(Page.value,endpoint.value);
+    fetchAiData(Page.value);
   }
-  
 
-Future<void> fetchMoreAiData(int page , int endpoint) async {
+void ChangeEndPoint( id){
+endpoint.value = id;
+fetchAiData(Page.value);
+}
+
+Future<void> fetchMoreAiData(int page ) async {
     PageForMorData++;
   print(PageForMorData);
     try {
       startLoading();
-    final result = await _apiService.getApiData(endpoint,PageForMorData.value);
+    final result = await _apiService.getApiData(endpoint.value,PageForMorData.value);
       AiData.addAll(result);
     } catch (e) {
     handleErrorForMoreDta(e.toString());
@@ -38,10 +42,10 @@ Future<void> fetchMoreAiData(int page , int endpoint) async {
 
 
 
-  Future<void> fetchAiData(int Page , int endpoint) async {
+  Future<void> fetchAiData(int Page) async {
     try {
       startLoading();
-final result = await _apiService.getApiData(endpoint,Page);
+final result = await _apiService.getApiData(endpoint.value,Page);
       AiData.value = result;
       print('object');
       print(AiData);

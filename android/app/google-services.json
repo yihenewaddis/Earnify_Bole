@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "607485914650",
-    "project_id": "earnify-bole-f1c09",
-    "storage_bucket": "earnify-bole-f1c09.firebasestorage.app"
+    "project_number": "337436476517",
+    "project_id": "earnify-bole-f0861",
+    "storage_bucket": "earnify-bole-f0861.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:607485914650:android:e128ecbf39191c62d2eba3",
+        "mobilesdk_app_id": "1:337436476517:android:2f99b1076348de4a65b28c",
         "android_client_info": {
-          "package_name": "com.bolenav.blog"
+          "package_name": "com.bolefx.earnify"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyChoouoKwe9rNrcqnQLmi7CY_-XwtiF7fk"
+          "current_key": "AIzaSyBvfy4XYiJcbATSJ8ggs_4tRykn0va-2ec"
         }
       ],
       "services": {

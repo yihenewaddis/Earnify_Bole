@@ -1,6 +1,8 @@
+import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/EarningAppController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
+import 'package:earnify_bole/Widgets/GridCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -13,16 +15,16 @@ class EarningApps extends StatelessWidget {
   Widget build(BuildContext context) {
     RefreshController _refreshController = RefreshController(initialRefresh: false);
 final controller = Get.put(EarningAppController());
-
+final AllPostController = Get.find<AllController>(); 
   void _onRefresh() async{
   controller.EarningAppData.value = [];
-  await controller.fetchEarningAppData(1, 10);
+  await controller.fetchEarningAppData(1, 8);
     _refreshController.refreshCompleted();
   }
 
 
   void _onLoading() async{
-await controller.fetchMoreEarningAppData(controller.PageForMorData.value,10);
+await controller.fetchMoreEarningAppData(controller.PageForMorData.value,8);
     _refreshController.loadComplete();
   }
     return   Scaffold(
@@ -71,32 +73,79 @@ await controller.fetchMoreEarningAppData(controller.PageForMorData.value,10);
       //               ),
         
                     
-                    const SizedBox(height: 15,),
-                    
-Obx(() => (controller.EarningAppData.isEmpty)?
-                Column(
-                  children: [
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                  ],
-                ):
+                    const SizedBox(height: 5,),
+                    Obx(
+                        () => (controller.EarningAppData.isEmpty)
+                            ? Column(
+                                children: [
+                                  shimmerEffect_2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  shimmerEffect_2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  shimmerEffect_2(context),
+                                ],
+                              )
+                            : AllPostController.IsGrid.value
+                                ? GridView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      childAspectRatio: 0.8,
+                                    ),
+                                    itemCount:
+                                        controller.EarningAppData.length,
+                                    itemBuilder: (context, index) {
+                                      return GridCard(
+                                        context,
+                                        controller.EarningAppData[index],
+                                        index,
+                                        'Earning App',
+                                      );
+                                    },
+                                  )
+                                : Column(
+                                    children: List.generate(
+                                      controller.EarningAppData.length,
+                                      (index) => BigCard(
+                                          context,
+                                          controller.EarningAppData[index],
+                                          index,
+                                          'Earning App'),
+                                    ),
+                                  ),
+                      ), 
 
-                Column(
-                      children: List.generate(
-                  controller.EarningAppData.length,
-              (index) => GestureDetector(
-            onTap: ()=>Get.to(DetailScreen()),
-child: BigCard(context,controller.EarningAppData[index],index,'Earning App'),
-              )
-                      ),
-                    ),
+// Obx(() => (controller.EarningAppData.isEmpty)?
+//                 Column(
+//                   children: [
+//                     shimmerEffect_2(context),
+//                     SizedBox(height: 10,),
+//                     shimmerEffect_2(context),
+//                     SizedBox(height: 10,),
+//                     shimmerEffect_2(context),
+//                   ],
+//                 ):
+
+//                 Column(
+//                       children: List.generate(
+//                   controller.EarningAppData.length,
+//               (index) => GestureDetector(
+//             onTap: ()=>Get.to(DetailScreen()),
+// child: BigCard(context,controller.EarningAppData[index],index,'Earning App'),
+//               )
+//                       ),
+//                     ),
                         
-                    ),
+//                     ),
                     
-                    const SizedBox(height: 20,),
+                    const SizedBox(height: 10,),
                     ],
                   )
                 )

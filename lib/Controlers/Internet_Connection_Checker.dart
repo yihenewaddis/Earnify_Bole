@@ -37,23 +37,25 @@ class InternetConnectionControler extends GetxController{
           Container(
             width: double.infinity,
             height: MediaQuery.of(Get.context!).size.height, // Access context via Get
-            color: Colors.white,
+            color: Color(0xFF101B2D),
             child: Column(
             children: [
               const SizedBox(height: 100,),
               const Expanded(
                 flex: 2,
-                child: Image(image: AssetImage('assets/noInternet.jpg'),fit: BoxFit.contain,)),
+                child: Image(image: AssetImage('assets/noInternet.png'),fit: BoxFit.contain,)),
               Expanded(
                 flex: 1,
                 child: Column(
                 children: [
                   const Text('No internet connection',style: TextStyle(
+                    color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.w600
                   ),),
                   
                   const Text('check your internet connection',style: TextStyle(
+                    color: Colors.white,
                     fontSize: 16
                   ),),
 

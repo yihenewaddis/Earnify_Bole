@@ -1,5 +1,7 @@
+import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/SportController.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
+import 'package:earnify_bole/Widgets/GridCard.dart';
 import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -11,16 +13,16 @@ class Sport extends StatelessWidget {
   Widget build(BuildContext context) {
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 final controller = Get.put(SportController());
-
+final AllPostController = Get.find<AllController>(); 
   void _onRefresh() async{
   controller.SportData.value = [];
-  await controller.fetchSportData(1, 4);
+  await controller.fetchSportData(1, 11);
     _refreshController.refreshCompleted();
   }
 
 
   void _onLoading() async{
-await controller.fetchMoreSportData(controller.PageForMorData.value,4);
+await controller.fetchMoreSportData(controller.PageForMorData.value,11);
     _refreshController.loadComplete();
   }
     return   Scaffold(
@@ -41,57 +43,60 @@ await controller.fetchMoreSportData(controller.PageForMorData.value,4);
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
-      //                 Row(     
-      //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //                 children: [
-      //                   Row(
-      //                     children: [
-      //                     Container(
-      //                         width: 5, 
-      //                         height: 25,
-      //                         decoration: BoxDecoration(
-                                
-      //                           color: Colors.black, 
-      //                           borderRadius: BorderRadius.circular(10)
-      //                         ),
-      //                       ),
-      //                       const SizedBox(width: 5,),
-      //   const Text('Sport',style: TextStyle(
-      //                         fontSize: 20,
-      //                         fontWeight: FontWeight.w700
-      //                       ),)
-      //                     ],
-      //                   ),
-      //                   GestureDetector(
-      // child: Icon(Icons.sports),
-      //                   )
-      //                 ],
-      //               ),
         
                     
-                    const SizedBox(height: 15,),
+                    const SizedBox(height: 5,),
                     
-Obx(() => (controller.SportData.isEmpty)?
-                Column(
-                  children: [
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                    SizedBox(height: 10,),
-                    shimmerEffect_2(context),
-                  ],
-                ):
+                      Obx(
+                        () => (controller.SportData.isEmpty)
+                            ? Column(
+                                children: [
+                                  shimmerEffect_2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  shimmerEffect_2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  shimmerEffect_2(context),
+                                ],
+                              )
+                            : AllPostController.IsGrid.value
+                                ? GridView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      childAspectRatio: 0.8,
+                                    ),
+                                    itemCount:
+                                        controller.SportData.length,
+                                    itemBuilder: (context, index) {
+                                      return GridCard(
+                                        context,
+                                        controller.SportData[index],
+                                        index,
+                                        'Sport',
+                                      );
+                                    },
+                                  )
+                                : Column(
+                                    children: List.generate(
+                                      controller.SportData.length,
+                                      (index) => BigCard(
+                                          context,
+                                          controller.SportData[index],
+                                          index,
+                                          'Sport'),
+                                    ),
+                                  ),
+                      ), 
 
-                Column(
-                      children: List.generate(
-              controller.SportData.length,
-      (index) => BigCard(context,controller.SportData[index],index,'Sport')
-                      ),
-                    ),
-                        
-                    ),
                     
-                    const SizedBox(height: 20,),
+                    const SizedBox(height: 10,),
                     ],
                   )
                 )

@@ -52,6 +52,7 @@ Future<void> fetchAllData(int Page , int endpoint) async {
     try {
       startLoading();
 final result = await _apiService.getApiData(endpoint,Page);
+
       AllData.value = result;
     } catch (e) {
       handleError(e.toString());
@@ -59,5 +60,7 @@ final result = await _apiService.getApiData(endpoint,Page);
       stopLoading();
     }
   }
+
+
 }
 

@@ -17,7 +17,6 @@ import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -124,9 +123,9 @@ height: 120,
         borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 218, 217, 217).withOpacity(0.5),
+            color: const Color(0xFF101B2D).withOpacity(0.1),
             spreadRadius: 1,
-            blurRadius: 2,
+            blurRadius: 1,
             offset: Offset(1, 1),
           ),
         ],
@@ -205,7 +204,9 @@ DetailControllers.Relateddata.value = techController.TechData;
               child: SizedBox(
                   width: 100,
                   height: 180,
-                  child: imageEnhanced(data['jetpack_featured_media_url'])),
+                  child: imageEnhanced(data['jetpack_featured_media_url']
+                  )
+                  ),
             ),
             SizedBox(
               width: 5,
@@ -249,14 +250,14 @@ DetailControllers.Relateddata.value = techController.TechData;
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                  Icon(Icons.person, size: 15, color: Color(0xFFA4634E)),
+                  Icon(Icons.person, size: 15, color: Color(0xFF101B2D)),
                   SizedBox(width: 5,),
                       Text(
                         'Admin',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFA4634E)),
+                          color: Color(0xFF101B2D)),
                       )
                     ],
                   ),
@@ -268,7 +269,7 @@ DetailControllers.Relateddata.value = techController.TechData;
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFA4634E)),
+                          color: Color(0xFF101B2D)),
                       )
                     ],
                   ),
@@ -277,12 +278,12 @@ DetailControllers.Relateddata.value = techController.TechData;
                 child: isBookmarkedRx.value 
                   ? CircleAvatar(
                     maxRadius: 13,
-                    backgroundColor: Color(0xFFA4634E),
+                    backgroundColor: Color(0xFF101B2D),
                     child: Icon(Icons.bookmark_add_outlined, color: Colors.red,size: 15,),
                   )
                   : CircleAvatar(
                     maxRadius: 13,
-                      backgroundColor: Color(0xFFA4634E),
+                      backgroundColor: Color(0xFF101B2D),
                       child: Icon(Icons.bookmark_add_outlined, color: Colors.white,size: 18,),
                   ),
               ))

@@ -2,8 +2,7 @@ import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
 import 'package:earnify_bole/Controlers/SearchController.dart';
-import 'package:earnify_bole/Widgets/ShimmerEffect.dart';
-import 'package:earnify_bole/Widgets/SmallCard.dart';
+import 'package:earnify_bole/Widgets/BigCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,26 +23,29 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF101B2D),
         actions: [
           GestureDetector(
             onTap: ()=>{
               controller.fetchSearchData(_textController.text)
             },
-            child: Icon(Icons.search),
+            child: Icon(Icons.search,color: Colors.white,),
           ),
           SizedBox(width: 10,)
         ],
         title: TextField(
+          autofocus: true,
+          cursorColor: Colors.white,
+          style: TextStyle(color: Colors.white),
           controller: _textController,
           decoration: InputDecoration(
           hintText: 'search...',
     border: InputBorder.none,
     contentPadding: EdgeInsets.zero,
+   hintStyle: TextStyle(color: Colors.white)
    
-
           ),
         ),
         centerTitle: true,
@@ -53,36 +55,45 @@ class _SearchScreenState extends State<SearchScreen> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: controller.IsSearching.value?[
-            SizedBox(height: 50,),
+            SizedBox(height: 10,),
             CircularProgressIndicator()
           ]:[
-            SizedBox(height: 50,),
-            Center(child: Text('No data exist'),)
+            SizedBox(height: 150,),
+            Center(child:  Image.asset(
+                  'assets/search.png',
+                  width: 100,
+                  height: 100,
+                
+                ),)
           ],
         ),
       ):SingleChildScrollView(
-        child: Column(
-          children: List.generate(controller.SearchData.length, (index) => GestureDetector
-          (
-            onTap: () {
-                                  adMobHelper.createInterstitialAd();
-DetailControllers.Relateddata.value = Popularcontroller.PopularData;
-                                  DetailControllers.data.value = {
-                                    'id': controller.SearchData[index]
-                                        ['id'],
-                                    'title':controller.SearchData[index]
-                                        ['title']['rendered'],
-                                    'content': controller.SearchData[index]
-                                        ['content']['rendered'],
-                                    'date':controller.SearchData[index]
-                                        ['date'],
-                                    'image':controller.SearchData[index]
-                                        ['jetpack_featured_media_url'],
-                                    "Link": controller.SearchData[index]['link']
-                                  };
-                                  Get.toNamed('/detail');
-                                },
-            child: SmallCard(context, controller.SearchData[index], index,'search'))),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
+            
+            children: List.generate(controller.SearchData.length, (index) => GestureDetector
+            (
+              onTap: () {
+                                    adMobHelper.createInterstitialAd();
+          DetailControllers.Relateddata.value = Popularcontroller.PopularData;
+                                    DetailControllers.data.value = {
+                                      'id': controller.SearchData[index]
+                                          ['id'],
+                                      'title':controller.SearchData[index]
+                                          ['title']['rendered'],
+                                      'content': controller.SearchData[index]
+                                          ['content']['rendered'],
+                                      'date':controller.SearchData[index]
+                                          ['date'],
+                                      'image':controller.SearchData[index]
+                                          ['jetpack_featured_media_url'],
+                                      "Link": controller.SearchData[index]['link']
+                                    };
+                                    Get.toNamed('/detail');
+                                  },
+              child: BigCard(context, controller.SearchData[index], index,'Popular'))),
+          ),
         ),
       )),
     );
