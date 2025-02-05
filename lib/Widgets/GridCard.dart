@@ -1,23 +1,13 @@
 import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/AiController.dart';
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
-import 'package:earnify_bole/Controlers/AndroidAppController.dart';
-import 'package:earnify_bole/Controlers/AndroidTipsControler.dart';
-import 'package:earnify_bole/Controlers/BestWebsiteControler.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
-import 'package:earnify_bole/Controlers/CryptoController.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
-import 'package:earnify_bole/Controlers/EarnifyController.dart';
-import 'package:earnify_bole/Controlers/EarningAppController.dart';
-import 'package:earnify_bole/Controlers/ForexController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
-import 'package:earnify_bole/Controlers/SportController.dart';
-import 'package:earnify_bole/Controlers/Techcontroller.dart';
 import 'package:earnify_bole/Widgets/ImageEnhanced.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -137,44 +127,6 @@ DetailControllers.Relateddata.value = popularController.PopularData;
 else if(catagory == 'AI'){
 final aiController = Get.find<AiController>();
 DetailControllers.Relateddata.value = aiController.AiData;
- }
-else if(catagory == 'Android Apps'){
-final androidAppController = Get.find<AndroiAppController>();
-DetailControllers.Relateddata.value = androidAppController.AndroidAppData;
- }
-else if(catagory == 'Android Tips'){
-final androidTipsController = Get.find<AndroiTipsController>();
-DetailControllers.Relateddata.value = androidTipsController.AndroidTipsData;
- }
-else if(catagory == 'Website'){
-
-final bestWebsiteController = Get.find<BestWebsiteController>();
-DetailControllers.Relateddata.value = bestWebsiteController.BestWebsiteData;
- }
-else if(catagory == 'Crypto'){
-final cryptoController = Get.find<CryptoController>();
-DetailControllers.Relateddata.value = cryptoController.CryptoData;
- }
- else if(catagory == 'Earnify'){
-
-final earnifyController = Get.find<EarnifyController>();
-DetailControllers.Relateddata.value = earnifyController.EarnifyData;
- }
-else if(catagory == 'Earning App'){
-final earningAppController = Get.find<EarningAppController>();
-DetailControllers.Relateddata.value = earningAppController.EarningAppData;
- }
-else if(catagory == 'Forex'){
-final forexController = Get.find<ForexController>();
-DetailControllers.Relateddata.value = forexController.ForexData;
- }
-else if(catagory == 'Sport'){
-final sportController = Get.find<SportController>();
-DetailControllers.Relateddata.value = sportController.SportData;
- }
-else if(catagory == 'Tech'){
-final techController = Get.find<TechController>();
-DetailControllers.Relateddata.value = techController.TechData;
  }
   
           DetailControllers.data.value = {

@@ -1,13 +1,10 @@
 
-
-
-import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdMobHelper{
-  static String get bannerUnitId =>'ca-app-pub-3940256099942544/6300978111';
-  static String get interstitialUnitId =>'ca-app-pub-3940256099942544/1033173712';
+  static String get bannerUnitId =>'ca-app-pub-1500047410140952/4927125719';
+  static String get interstitialUnitId =>'ca-app-pub-1500047410140952/3614044046';
   static String get rewardedUnitId =>'ca-app-pub-3940256099942544/5224354917';
-  static String get nativeUnitId =>'ca-app-pub-3940256099942544/2247696110';
+  static String get nativeUnitId =>'ca-app-pub-1500047410140952/3614044046';
 bool isInterstitialAdReady = false;
 bool IsBannerAdRedy = false;
 InterstitialAd? interstitialAd;
@@ -21,7 +18,7 @@ if(MobileAds.instance==null){
 void createInterstitialAd(){
 InterstitialAd.load(adUnitId: interstitialUnitId, request: AdRequest(), adLoadCallback: InterstitialAdLoadCallback(
   onAdLoaded: (InterstitialAd ad){
-    interstitialAd = ad;
+    interstitialAd = ad; 
     numOfAttempts = 0;
 isInterstitialAdReady = true; 
  showInterstitialAd();

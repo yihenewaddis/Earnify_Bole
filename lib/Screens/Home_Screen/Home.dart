@@ -1,4 +1,3 @@
-
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Category.dart';
@@ -10,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -199,33 +197,6 @@ length:catagoryController.CategoryList.length+1,
               for (int i = 0; i < catagoryController.CategoryList.length; i++)   Tab(
                   text: catagoryController.CategoryList[i]['name'],
                 ),
-              // Tab(
-              //   text: 'Android Apps',
-              // ),
-              // Tab(
-              //   text: 'Android tips',
-              // ),
-              // Tab(
-              //   text: 'Best Website',
-              // ),
-              // Tab(
-              //   text: 'Crypto',
-              // ),
-              // Tab(
-              //   text: 'Earnify',
-              // ),
-              // Tab(
-              //   text: 'Earning apps',
-              // ),
-              // Tab(
-              //   text: 'Forex',
-              // ),
-              // Tab(
-              //   text: 'Sport',
-              // ),
-              // Tab(
-              //   text: 'Tech',
-              // ),
             
             ]),
               
@@ -236,17 +207,7 @@ length:catagoryController.CategoryList.length+1,
             children: [
               TabBarView(children: [
                 All(),
-              // All(),
               for (int i = 0; i < catagoryController.CategoryList.length; i++) AI(Id: catagoryController.CategoryList[i]['id']),
-              // AndroidApps(),
-              // AndroidTips(),
-              // BestWebsite(),
-              // Crypto(),
-              // Earnify(),
-              // EarningApps(),
-              // Forex(),
-              // Sport(),
-              // // Tech()
                       ]),
  
             ],
