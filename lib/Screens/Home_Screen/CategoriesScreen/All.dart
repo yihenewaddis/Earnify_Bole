@@ -247,7 +247,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                                 width: 5,
                               ),
                               const Text(
-                                'Popular News',
+                                'Popular posts',
                                 style: TextStyle(
                                   color: Color(0xFF101B2D),
                                     fontSize: 20, fontWeight: FontWeight.w700),
@@ -348,7 +348,7 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
                             width: 5,
                           ),
                           const Text(
-                            'Latest News',
+                            'Latest posts',
                             style: TextStyle(
                               color: Color(0xFF101B2D),
                                 fontSize: 20, fontWeight: FontWeight.w700),
