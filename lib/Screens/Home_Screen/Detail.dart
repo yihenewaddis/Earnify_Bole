@@ -219,12 +219,12 @@ HtmlWidget(
                           textStyle:
                           TextStyle(
 fontWeight: FontWeight.bold,
-                            fontSize: 20, color: Colors.grey[800]),
+                            fontSize: 20, color: Colors.grey[900]),
                         ),
                         HtmlWidget(
                           controller.data['content'],
                           textStyle:
-                              TextStyle(fontSize: 16, color: Colors.grey[600]),
+                              TextStyle(fontSize: 16, color: Colors.grey[900]),
                         ),
                         
                         SizedBox(height: 10),
