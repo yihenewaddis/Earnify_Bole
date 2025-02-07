@@ -52,7 +52,7 @@ android {
         applicationId "com.bolefx.earnify"
         multiDexEnabled true
         minSdkVersion 21
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
