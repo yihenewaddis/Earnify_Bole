@@ -72,31 +72,31 @@ isBookmarkedRx.value = isBookmarked();
 
 return Column(
   children: [
-    (index % 3 == 0 && index !=0)?
+//     (index % 3 == 0 && index !=0)?
 
-      SizedBox(
+//       SizedBox(
 
-      width: MediaQuery.of(context).size.width,
-height: 200,
-        child: Stack(
-          children: [
-            SizedBox(height: 10,),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Center(
-                child: Text('AD'),
-              ),
-            ),
-            AdWidget(
-            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width-10,height: 200)..load(),
-              key: UniqueKey(),
-            ),
-          ],
-        ),
-      ):
+//       width: MediaQuery.of(context).size.width,
+// height: 200,
+//         child: Stack(
+//           children: [
+//             SizedBox(height: 10,),
+//             Positioned(
+//               top: 0,
+//               left: 0,
+//               right: 0,
+//               bottom: 0,
+//               child: Center(
+//                 child: Text('AD'),
+//               ),
+//             ),
+//             AdWidget(
+//             ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width-10,height: 200)..load(),
+//               key: UniqueKey(),
+//             ),
+//           ],
+//         ),
+//       ):
     Container(
       padding: EdgeInsets.all(5),
       width: MediaQuery.of(context).size.width,

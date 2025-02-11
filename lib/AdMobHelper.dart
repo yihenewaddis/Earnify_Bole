@@ -3,8 +3,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdMobHelper{
   static String get bannerUnitId =>'ca-app-pub-1500047410140952/4927125719';
   static String get interstitialUnitId =>'ca-app-pub-1500047410140952/3614044046';
-  static String get rewardedUnitId =>'ca-app-pub-3940256099942544/5224354917';
-  static String get nativeUnitId =>'ca-app-pub-1500047410140952/3614044046';
 bool isInterstitialAdReady = false;
 bool IsBannerAdRedy = false;
 InterstitialAd? interstitialAd;

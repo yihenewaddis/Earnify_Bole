@@ -1,3 +1,4 @@
+import 'package:earnify_bole/AdMobHelper.dart';
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/FetchCategoryController.dart';
 import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/Category.dart';
@@ -5,6 +6,7 @@ import 'package:earnify_bole/Screens/Home_Screen/CategoriesScreen/All.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -56,7 +58,7 @@ length:catagoryController.CategoryList.length+1,
                         
                       ],
                     ),
-                    Text('App Version: 1.0.1',style: TextStyle(
+                    Text('App Version: 1.0.5',style: TextStyle(
                       color: Colors.white
                     ),)
                   ],
@@ -209,7 +211,20 @@ length:catagoryController.CategoryList.length+1,
                 All(),
               for (int i = 0; i < catagoryController.CategoryList.length; i++) AI(Id: catagoryController.CategoryList[i]['id']),
                       ]),
- 
+         Positioned(
+  bottom: 2,
+  left: 0,
+  right: 0,
+  child: Container(
+height: 60, 
+width: MediaQuery.of(context).size.width,
+    alignment: Alignment.center,
+child: AdWidget(ad: AdMobHelper.getBannerAd(context)..load(),
+    key: UniqueKey(),
+),
+    
+  ),
+),
             ],
           ),
         ),

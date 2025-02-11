@@ -78,10 +78,10 @@ isBookmarkedRx.value = isBookmarked();
 return Column(
   children: [
     
-if(index % 3 == 0 && index !=0)
+if(index % 3 == 0 )
 
       SizedBox(
-height:130,
+height:100,
 width: MediaQuery.of(context).size.width.toDouble(),
         child: Stack(
           children: [
@@ -96,7 +96,7 @@ width: MediaQuery.of(context).size.width.toDouble(),
               ),
             ),
             AdWidget(
-            ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 130)..load(),
+            ad: AdMobHelper.getBannerAd(context)..load(),
               key: UniqueKey(),
             ),
           ],

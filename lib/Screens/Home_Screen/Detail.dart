@@ -206,10 +206,10 @@ onTap: () =>{
 SizedBox(height: 10),
                         
 SizedBox(
-        height: 250,
+        height: 100,
         width: MediaQuery.of(context).size.width.toDouble(),
         child: AdWidget(
-ad: AdMobHelper.getBannerAd(context,width: MediaQuery.of(context).size.width.toDouble(),height: 250)..load(),
+ad: AdMobHelper.getBannerAd(context)..load(),
           key: UniqueKey(),
         ),
       ),

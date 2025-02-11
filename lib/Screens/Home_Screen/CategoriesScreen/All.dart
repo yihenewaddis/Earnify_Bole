@@ -1,11 +1,8 @@
 import 'package:earnify_bole/AdMobHelper.dart';
-import 'package:earnify_bole/Controlers/AdController.dart';
-import 'package:earnify_bole/Controlers/AiController.dart';
 import 'package:earnify_bole/Controlers/AllCotroller.dart';
 import 'package:earnify_bole/Controlers/BookMarkedController.dart';
 import 'package:earnify_bole/Controlers/DetailController.dart';
 import 'package:earnify_bole/Controlers/PopularController.dart';
-import 'package:earnify_bole/Screens/Home_Screen/Detail.dart';
 import 'package:earnify_bole/Screens/Home_Screen/Trending.dart';
 import 'package:earnify_bole/Widgets/BigCard.dart';
 import 'package:earnify_bole/Widgets/GridCard.dart';
@@ -17,7 +14,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 class DateFormatter {
   static String getRelativeTime(String dateString) {
     DateTime date = DateTime.parse(dateString);
@@ -224,7 +221,28 @@ DetailControllers.Relateddata.value = Popularcontroller.PopularData;
 
 
 
-
+      SizedBox(
+height:100,
+width: MediaQuery.of(context).size.width.toDouble(),
+        child: Stack(
+          children: [
+            SizedBox(height: 10,),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Center(
+                child: Text('AD'),
+              ),
+            ),
+            AdWidget(
+            ad: AdMobHelper.getBannerAd(context)..load(),
+              key: UniqueKey(),
+            ),
+          ],
+        ),
+      ),
 
 
               Padding(
